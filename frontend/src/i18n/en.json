@@ -29,7 +29,9 @@
       "subjects": "Subjects",
       "lessons": "Lessons",
       "quizzes": "Quizzes",
-      "languages": "Languages"
+      "languages": "Languages",
+      "free": "Free",
+      "ads": "No Ads"
     },
     "cards": {
       "lessons": { "title": "Lessons", "desc": "Video and reading lessons for early learners." },
@@ -77,6 +79,16 @@
         "desc": "Completely free, no advertising or third-party tracking"
       }
     },
+    "testimonials": {
+      "title": "What Parents & Teachers Say",
+      "subtitle": "Trusted by families and schools across Cambodia",
+      "teacher_role": "Teacher, Phnom Penh",
+      "teacher_quote": "Little Learner makes it so easy to assign lessons and track progress. My students love the quizzes!",
+      "parent_role": "Parent, Siem Reap",
+      "parent_quote": "My daughter can log in with her picture card. No typing needed, and I can see her scores anytime.",
+      "teacher2_role": "Teacher, Battambang",
+      "teacher2_quote": "The CMS lets me update our website content instantly. No developer needed."
+    },
     "roles": {
       "title": "For Everyone",
       "subtitle": "Built for every role in the learning community",
@@ -100,6 +112,28 @@
         "desc": "View your children's progress, scores and feedback",
         "link": "Parent Login"
       }
+    },
+    "how_steps": {
+      "1": { "title": "Admin Creates Content", "desc": "Lessons, quizzes and assignments in three languages." },
+      "2": { "title": "Teacher Assigns Work", "desc": "Pick lessons, set due dates, assign to students." },
+      "3": { "title": "Student Learns", "desc": "Do lessons, take quizzes, submit work." },
+      "4": { "title": "Parent Watches", "desc": "See progress, scores and feedback." }
+    },
+    "badges": {
+      "title": "Trusted & Safe",
+      "subtitle": "Child privacy and safety come first"
+    },
+    "faqs": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Everything you need to know",
+      "q1": "Is Little Learner free?",
+      "a1": "Yes! Little Learner is 100% free. No ads, no subscriptions, no hidden fees.",
+      "q2": "What languages do you support?",
+      "a2": "We support English, Khmer, and Arabic with full RTL (right-to-left) layout for Arabic.",
+      "q3": "Is my child's data safe?",
+      "a3": "Absolutely. We never show ads, never use trackers, and never use child data for AI training.",
+      "q4": "Do kids need to type to log in?",
+      "a4": "No! Students can log in with QR code, PIN, or picture — perfect for young children who can't type yet."
     },
     "cta_title": "Ready to start learning?",
     "cta_desc": "Join thousands of kids learning in English, Khmer and Arabic.",
