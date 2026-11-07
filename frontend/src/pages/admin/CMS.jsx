@@ -3,9 +3,8 @@ import { Palette, Layout, FileText, Globe } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { useTranslation } from "react-i18next";
 
-const { t } = useTranslation();
-
 export function AdminCMS() {
+  const { t } = useTranslation();
   const sections = [
     { to: "/admin/cms/settings", label: t("nav.cms"), icon: <Palette className="w-4 h-4" />, desc: "Site name, colors, contact", color: "border-blueberry" },
     { to: "/admin/cms/menus", label: "Menus", icon: <Layout className="w-4 h-4" />, desc: "Header & footer navigation", color: "border-sunshine" },
