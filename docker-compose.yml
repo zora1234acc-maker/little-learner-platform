@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: littlelearner-db
+    environment:
+      POSTGRES_USER: littlelearner
+      POSTGRES_PASSWORD: littlelearner
+      POSTGRES_DB: littlelearner
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U littlelearner -d littlelearner"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: littlelearner-backend
+    environment:
+      FLASK_APP: backend/wsgi.py
+      FLASK_ENV: development
+      DATABASE_URL: postgresql+psycopg2://littlelearner:littlelearner@postgres:5432/littlelearner
+      JWT_SECRET_KEY: change-me-in-production
+      BCRYPT_LOG_ROUNDS: 12
+      CORS_ORIGINS: http://localhost:5173
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app/backend
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: littlelearner-frontend
+    environment:
+      VITE_API_BASE: http://localhost:5000/api/v1
+      VITE_USE_REAL_API: 1
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
