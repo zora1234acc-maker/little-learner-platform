@@ -39,9 +39,21 @@ export function Home() {
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <InfoCard icon={<Play className="w-6 h-6 text-blueberry" />} title="Lessons" description="Video and reading lessons for early learners." />
-        <InfoCard icon={<BookOpen className="w-6 h-6 text-sky-500" />} title="Quizzes" description="Auto-scored quizzes with instant feedback." />
-        <InfoCard icon={<Globe className="w-6 h-6 text-mint-500" />} title="3 Languages" description="English, Khmer and Arabic with full RTL support." />
+        <InfoCard
+          icon={<Play className="w-6 h-6 text-blueberry" />}
+          title={t("home.cards.lessons.title")}
+          description={t("home.cards.lessons.desc")}
+        />
+        <InfoCard
+          icon={<BookOpen className="w-6 h-6 text-sky-500" />}
+          title={t("home.cards.quizzes.title")}
+          description={t("home.cards.quizzes.desc")}
+        />
+        <InfoCard
+          icon={<Globe className="w-6 h-6 text-mint-500" />}
+          title={t("home.cards.languages.title")}
+          description={t("home.cards.languages.desc")}
+        />
       </section>
     </div>
   );

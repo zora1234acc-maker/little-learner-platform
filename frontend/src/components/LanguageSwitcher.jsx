@@ -41,7 +41,7 @@ export function LanguageSwitcher() {
         <Globe className="w-4 h-4" />
         <span className="text-sm font-medium">{t("common.language")}</span>
         <span className="ml-auto text-xs text-muted-foreground">
-          {dir === "rtl" ? "RTL" : "LTR"}
+          {LANGUAGES.find((l) => l.code === i18n.language)?.rtl ? "RTL" : "LTR"}
         </span>
       </button>
 

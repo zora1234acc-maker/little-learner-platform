@@ -14,7 +14,12 @@
   "home": {
     "hero_title": "Learn, Play, Grow",
     "hero_subtitle": "Free lessons, quizzes and assignments for kids in English, Khmer and Arabic.",
-    "cta_start": "Start Learning"
+    "cta_start": "Start Learning",
+    "cards": {
+      "lessons": { "title": "Lessons", "desc": "Video and reading lessons for early learners." },
+      "quizzes": { "title": "Quizzes", "desc": "Auto-scored quizzes with instant feedback." },
+      "languages": { "title": "3 Languages", "desc": "English, Khmer and Arabic with full RTL support." }
+    }
   },
   "common": {
     "language": "Language",
