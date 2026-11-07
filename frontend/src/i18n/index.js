@@ -9,7 +9,6 @@ import ar from "./ar.json";
 const resources = {
   en: { translation: en },
   km: { translation: km },
-  ar: { translation: ar },
 };
 
 i18n
@@ -18,7 +17,7 @@ i18n
   .init({
     resources,
     fallbackLng: "en",
-    supportedLngs: ["en", "km", "ar"],
+    supportedLngs: ["en", "km"],
     detection: {
       order: ["localStorage", "navigator", "htmlTag"],
       caches: ["localStorage"],

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Play, BookOpen, Globe, Users, Star, Clock } from "lucide-react";
+import { ArrowRight, Play, BookOpen, Globe, Users, Star, Clock, ShieldCheck, Lock, GraduationCap, Mail, Palette, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { SectionDivider } from "@/components/SectionDivider";
 
@@ -14,16 +14,84 @@ export function Home() {
     { number: "3", label: t("home.stats.languages"), icon: <Globe className="w-5 h-5 text-sky-600" /> },
   ];
 
+  const features = [
+    {
+      icon: <User className="w-6 h-6 text-blueberry" />,
+      title: t("home.features.kid_login.title"),
+      desc: t("home.features.kid_login.desc"),
+    },
+    {
+      icon: <ShieldCheck className="w-6 h-6 text-mint-600" />,
+      title: t("home.features.privacy.title"),
+      desc: t("home.features.privacy.desc"),
+    },
+    {
+      icon: <Globe className="w-6 h-6 text-sky-600" />,
+      title: t("home.features.multilingual.title"),
+      desc: t("home.features.multilingual.desc"),
+    },
+    {
+      icon: <GraduationCap className="w-6 h-6 text-bubblegum" />,
+      title: t("home.features.admin_cms.title"),
+      desc: t("home.features.admin_cms.desc"),
+    },
+    {
+      icon: <Mail className="w-6 h-6 text-sunshine" />,
+      title: t("home.features.parent_view.title"),
+      desc: t("home.features.parent_view.desc"),
+    },
+    {
+      icon: <Lock className="w-6 h-6 text-blueberry" />,
+      title: t("home.features.no_ads.title"),
+      desc: t("home.features.no_ads.desc"),
+    },
+  ];
+
   const featuredSubjects = [
-    { id: "sub1", title: { en: "Khmer Language", km: "ភាសាខ្មែរ", ar: "اللغة الخميرية" }, icon: "📖", color: "border-blueberry" },
-    { id: "sub2", title: { en: "Mathematics", km: "គណិតវិជ្ជា", ar: "الرياضيات" }, icon: "🔢", color: "border-sunshine" },
-    { id: "sub3", title: { en: "Science", km: "វិទ្យាសាស្ត្រ", ar: "العلوم" }, icon: "🔬", color: "border-mint" },
+    { id: "sub1", title: { en: "Khmer Language", km: "ភាសាខ្មែរ", ar: "اللغة الخميرية" }, icon: "📖", color: "border-blueberry", desc: t("home.subj_desc.khmer") },
+    { id: "sub2", title: { en: "Mathematics", km: "គណិតវិជ្ជា", ar: "الرياضيات" }, icon: "🔢", color: "border-sunshine", desc: t("home.subj_desc.math") },
+    { id: "sub3", title: { en: "Science", km: "វិទ្យាសាស្ត្រ", ar: "العلوم" }, icon: "🔬", color: "border-mint", desc: t("home.subj_desc.science") },
   ];
 
   const recentLessons = [
     { id: "l1", title: { en: "First Consonant: ក", km: "អក្សរដើម៖ ក" }, type: "reading", icon: <BookOpen className="w-5 h-5 text-blueberry" /> },
     { id: "l2", title: { en: "Counting 1 to 5", km: "គណនា 1 ដល់ 5" }, type: "video", icon: <Play className="w-5 h-5 text-sunshine" /> },
     { id: "l3", title: { en: "Parts of a Plant", km: "បច្ចុប្បន្នភាពរបស់ស្លឹង" }, type: "reading", icon: <Globe className="w-5 h-5 text-mint-600" /> },
+  ];
+
+  const roles = [
+    {
+      role: "admin",
+      title: t("home.roles.admin.title"),
+      desc: t("home.roles.admin.desc"),
+      icon: <User className="w-6 h-6 text-blueberry" />,
+      link: "/login",
+      linkText: t("home.roles.admin.link"),
+    },
+    {
+      role: "teacher",
+      title: t("home.roles.teacher.title"),
+      desc: t("home.roles.teacher.desc"),
+      icon: <GraduationCap className="w-6 h-6 text-sunshine" />,
+      link: "/login",
+      linkText: t("home.roles.teacher.link"),
+    },
+    {
+      role: "student",
+      title: t("home.roles.student.title"),
+      desc: t("home.roles.student.desc"),
+      icon: <User className="w-6 h-6 text-mint-600" />,
+      link: "/login",
+      linkText: t("home.roles.student.link"),
+    },
+    {
+      role: "parent",
+      title: t("home.roles.parent.title"),
+      desc: t("home.roles.parent.desc"),
+      icon: <User className="w-6 h-6 text-sky-600" />,
+      link: "/login",
+      linkText: t("home.roles.parent.link"),
+    },
   ];
 
   return (
@@ -75,6 +143,30 @@ export function Home() {
 
       <SectionDivider />
 
+      {/* Features Grid */}
+      <section>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+          <div>
+            <span className="eyebrow">{t("home.features.title")}</span>
+            <h2 className="text-3xl font-black text-blueberry">{t("home.features.subtitle")}</h2>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {features.map((feature) => (
+            <div key={feature.title} className="card-sm p-6 text-center">
+              <div className="icon-md bg-muted/50 text-muted-foreground mb-4 flex items-center justify-center">
+                {feature.icon}
+              </div>
+              <h3 className="font-semibold text-lg text-foreground mb-3">{feature.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{feature.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <SectionDivider />
+
       {/* Featured Subjects */}
       <section>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
@@ -102,9 +194,7 @@ export function Home() {
                   </div>
                 </div>
                 <h3 className="font-semibold text-lg text-foreground mb-2">{title}</h3>
-                <p className="text-xs text-muted-foreground">
-                  {sub.id === "sub1" ? t("home.subj_desc.khmer") : sub.id === "sub2" ? t("home.subj_desc.math") : t("home.subj_desc.science")}
-                </p>
+                <p className="text-xs text-muted-foreground">{sub.desc}</p>
               </a>
             );
           })}
@@ -145,24 +235,27 @@ export function Home() {
 
       <SectionDivider />
 
-      {/* How it works */}
-      <section>
-        <span className="eyebrow">{t("home.how_works")}</span>
-        <h2 className="text-3xl font-black text-blueberry mb-8">{t("home.how_works_title")}</h2>
-        <div className="space-y-10">
-          {[1, 2, 3, 4].map((step) => (
-            <div key={step} className="flex items-start gap-5">
-              <span className="flex-shrink-0 w-12 h-12 rounded-full bg-blueberry text-white text-xl font-black flex items-center justify-center">
-                {step}
-              </span>
-              <div className="max-w-2xl">
-                <h4 className="font-semibold text-xl text-foreground mb-2">{t(`home.steps.${step}.title`)}</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">{t(`home.steps.${step}.desc`)}</p>
+      {/* Roles */}
+      <section className="py-12">
+        <span className="eyebrow">{t("home.roles.title")}</span>
+        <h2 className="text-3xl font-black text-blueberry mb-8">{t("home.roles.subtitle")}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {roles.map((role) => (
+            <div key={role.role} className="card-sm p-6 text-center border-l-4 border-blueberry">
+              <div className="icon-md bg-blueberry/10 text-blueberry mb-4 mx-auto flex items-center justify-center">
+                {role.icon}
               </div>
+              <h3 className="font-semibold text-lg text-foreground mb-3">{role.title}</h3>
+              <p className="text-sm text-muted-foreground mb-6 leading-relaxed">{role.desc}</p>
+              <Link to={role.link} className="btn-secondary w-full">
+                {role.linkText}
+              </Link>
             </div>
           ))}
         </div>
       </section>
+
+      <SectionDivider />
 
       {/* CTA */}
       <section className="rounded-[var(--radius-xl)] bg-blueberry text-white p-8 md:p-12">

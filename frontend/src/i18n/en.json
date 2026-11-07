@@ -49,6 +49,58 @@
     "video": "Video",
     "reading": "Reading",
     "start": "Start Lesson",
+    "features": {
+      "title": "Why Choose Little Learner",
+      "subtitle": "Built for kids, teachers, and parents",
+      "kid_login": {
+        "title": "Kid-Friendly Login",
+        "desc": "QR code, PIN, or picture — no typing required for young children"
+      },
+      "privacy": {
+        "title": "Child Privacy",
+        "desc": "No ads, no trackers, no AI training on child data"
+      },
+      "multilingual": {
+        "title": "3 Languages",
+        "desc": "English, Khmer and Arabic with full RTL support"
+      },
+      "admin_cms": {
+        "title": "Admin Controls Everything",
+        "desc": "Edit header, footer, menus and pages from the dashboard"
+      },
+      "parent_view": {
+        "title": "Parent Dashboard",
+        "desc": "View your child's progress, scores and feedback"
+      },
+      "no_ads": {
+        "title": "No Ads & Trackers",
+        "desc": "Completely free, no advertising or third-party tracking"
+      }
+    },
+    "roles": {
+      "title": "For Everyone",
+      "subtitle": "Built for every role in the learning community",
+      "admin": {
+        "title": "Administrator",
+        "desc": "Manage users, content, website CMS and grading",
+        "link": "Admin Login"
+      },
+      "teacher": {
+        "title": "Teacher",
+        "desc": "Browse library, assign work, grade submissions, track class",
+        "link": "Teacher Login"
+      },
+      "student": {
+        "title": "Student",
+        "desc": "Do lessons, take quizzes, submit assignments",
+        "link": "Student Login"
+      },
+      "parent": {
+        "title": "Parent",
+        "desc": "View your children's progress, scores and feedback",
+        "link": "Parent Login"
+      }
+    },
     "cta_title": "Ready to start learning?",
     "cta_desc": "Join thousands of kids learning in English, Khmer and Arabic.",
     "how_works": "How it works",
