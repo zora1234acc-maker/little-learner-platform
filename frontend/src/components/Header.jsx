@@ -9,7 +9,6 @@ export function Header() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
-  // Data-driven menu items (in production these come from /public/menus API)
   const menuItems = [
     { href: "/", label: t("nav.home") },
     { href: "/subjects", label: t("nav.subjects") },
@@ -33,11 +32,9 @@ export function Header() {
             <Link
               key={item.href}
               to={item.href}
-              className={`${
-                location.pathname === item.href
-                  ? "text-blueberry font-semibold"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
+              className={location.pathname === item.href
+                ? "text-blueberry font-semibold"
+                : "text-muted-foreground hover:text-foreground"}
             >
               {item.label}
             </Link>
@@ -76,5 +73,3 @@ export function Header() {
     </header>
   );
 }
-
-

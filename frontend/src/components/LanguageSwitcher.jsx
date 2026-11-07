@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
-import { Globe, Layout, Sun, Moon } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Globe } from "lucide-react";
 
 const LANGUAGES = [
   { code: "en", label: "English", rtl: false },
@@ -10,13 +10,13 @@ const LANGUAGES = [
 
 export function LanguageSwitcher() {
   const { i18n, t } = useTranslation();
-  const [dir, setDir] = useState<"ltr" | "rtl">("ltr");
+  const [dir, setDir] = useState("ltr");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const currentLang = i18n.language as string;
+    const currentLang = i18n.language;
     const lang = LANGUAGES.find((l) => l.code === currentLang);
-    const newDir = lang?.rtl ? "rtl" : "ltr";
+    const newDir = lang ? (lang.rtl ? "rtl" : "ltr") : "ltr";
     setDir(newDir);
     document.documentElement.setAttribute("dir", newDir);
     document.documentElement.setAttribute("lang", currentLang);
@@ -27,7 +27,7 @@ export function LanguageSwitcher() {
     }
   }, [i18n.language]);
 
-  const changeLanguage = (code: string) => {
+  const changeLanguage = (code) => {
     i18n.changeLanguage(code);
     setOpen(false);
   };
@@ -51,11 +51,7 @@ export function LanguageSwitcher() {
             <button
               key={lang.code}
               onClick={() => changeLanguage(lang.code)}
-              className={`w-full flex items-center gap-3 px-3 py-2 text-sm rounded-md transition-colors ${
-                i18n.language === lang.code
-                  ? "bg-primary text-primary-foreground"
-                  : "hover:bg-accent hover:text-accent-foreground"
-              }`}
+              className={`w-full flex items-center gap-3 px-3 py-2 text-sm rounded-md transition-colors ${i18n.language === lang.code ? "bg-primary text-primary-foreground" : "hover:bg-accent hover:text-accent-foreground"}`}
             >
               <span>{lang.label}</span>
               <span className="ml-auto text-xs">{lang.rtl ? "RTL" : "LTR"}</span>
@@ -64,32 +60,5 @@ export function LanguageSwitcher() {
         </div>
       )}
     </div>
-  );
-}
-
-export function RTLToggle() {
-  const { t } = useTranslation();
-  const [isRtl, setIsRtl] = useState(false);
-
-  useEffect(() => {
-    const currentDir = document.documentElement.getAttribute("dir");
-    setIsRtl(currentDir === "rtl");
-  }, []);
-
-  const toggleDir = () => {
-    const next = !isRtl;
-    setIsRtl(next);
-    document.documentElement.setAttribute("dir", next ? "rtl" : "ltr");
-    document.body.classList.toggle("rtl", next);
-  };
-
-  return (
-    <button
-      onClick={toggleDir}
-      className="p-2 rounded-lg border border-border bg-background text-foreground hover:bg-accent transition-colors"
-      title={t("common.rtl_toggle")}
-    >
-      {isRtl ? <Layout className="w-4 h-4" /> : <Layout className="w-4 h-4" />}
-    </button>
   );
 }

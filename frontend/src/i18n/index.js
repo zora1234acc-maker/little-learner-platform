@@ -10,7 +10,7 @@ const resources = {
   en: { translation: en },
   km: { translation: km },
   ar: { translation: ar },
-} as const;
+};
 
 i18n
   .use(LanguageDetector)
