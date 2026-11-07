@@ -3,7 +3,7 @@ import { Layout } from "@/components/Layout";
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { SimpleLayout } from "@/components/SimpleLayout";
 import { Home } from "@/pages/public/Home";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+
 import { Subjects } from "@/pages/public/Subjects";
 import { CourseDetail } from "@/pages/public/CourseDetail";
 import { LessonList } from "@/pages/public/LessonList";
@@ -44,7 +44,6 @@ export function App() {
       <SiteProvider>
         <BrowserRouter>
           <div className="min-h-screen bg-background">
-            <LanguageSwitcher />
             <Routes>
               {/* Public pages — use Layout with Header + Footer */}
               <Route element={<Layout />}>

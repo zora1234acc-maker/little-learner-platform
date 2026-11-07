@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Menu, X, GraduationCap } from "lucide-react";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+
 import { useSite } from "../context/SiteContext";
 
 export function Header() {
@@ -54,7 +54,6 @@ export function Header() {
           >
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-          <LanguageSwitcher />
         </div>
       </div>
 
