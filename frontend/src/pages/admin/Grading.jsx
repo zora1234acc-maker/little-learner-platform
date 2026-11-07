@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { api } from "../../api/client";
+import { api } from "@/api/client";
 import { Mail, Clock } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export function AdminGrading() {
   const { t } = useTranslation();
@@ -27,18 +28,23 @@ export function AdminGrading() {
   const gradedIds = new Set(grades.map((g) => g.submission_id));
 
   if (loading) {
-    return <div className="text-center py-20 text-muted-foreground animate-pulse">Loading...</div>;
+    return (
+      <div className="space-y-6">
+        <PageHeader eyebrow={t("nav.grading")} title="Grade submissions" description="Review and grade student work." />
+        <div className="text-center py-20 text-muted-foreground animate-pulse">Loading...</div>
+      </div>
+    );
   }
 
   const pending = submissions.filter((s) => !gradedIds.has(s.id));
 
   return (
     <div className="space-y-6">
-      <div>
-        <span className="eyebrow">Grading Queue</span>
-        <h1 className="text-2xl font-bold text-blueberry">Grade submissions</h1>
-        <p className="text-muted-foreground">Review and grade student work.</p>
-      </div>
+      <PageHeader
+        eyebrow={t("nav.grading")}
+        title="Grade submissions"
+        description="Review and grade student work."
+      />
 
       <div className="flex gap-3 text-sm mb-4">
         <span className="px-2.5 py-1 rounded-md bg-mint/10 text-mint-700 border border-mint/20">{pending.length} Pending</span>

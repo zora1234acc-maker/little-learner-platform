@@ -1,21 +1,25 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { BookOpen, GraduationCap, FileText, Play } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export function AdminContent() {
+  const { t } = useTranslation();
+
   const sections = [
-    { to: "/admin/content/subjects", label: "Subjects", icon: <BookOpen className="w-4 h-4" />, desc: "Create subjects (Khmer, Math, Science)", color: "border-blueberry" },
+    { to: "/admin/content/subjects", label: t("nav.content"), icon: <BookOpen className="w-4 h-4" />, desc: "Create subjects (Khmer, Math, Science)", color: "border-blueberry" },
     { to: "/admin/content/courses", label: "Courses", icon: <GraduationCap className="w-4 h-4" />, desc: "Build courses under subjects", color: "border-sunshine" },
     { to: "/admin/content/lessons", label: "Lessons", icon: <FileText className="w-4 h-4" />, desc: "Reading & video lessons", color: "border-mint" },
     { to: "/admin/content/quizzes", label: "Quizzes", icon: <Play className="w-4 h-4" />, desc: "Multiple-choice quizzes", color: "border-sky" }
   ];
 
   return (
-    <div className="space-y-8">
-      <div>
-        <span className="eyebrow">Content Library</span>
-        <h1 className="text-2xl font-bold text-blueberry">Build content</h1>
-        <p className="text-muted-foreground">Admin builds content. Teachers browse and assign.</p>
-      </div>
+    <div className="space-y-6">
+      <PageHeader
+        eyebrow={t("nav.content")}
+        title="Content Library"
+        description="Admin builds content. Teachers browse and assign."
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {sections.map((s) => (

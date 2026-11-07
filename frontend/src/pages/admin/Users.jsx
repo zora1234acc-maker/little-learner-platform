@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { api } from "../../api/client";
+import { api } from "@/api/client";
 import { Search, UserPlus, Trash2, Edit3 } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export function AdminUsers() {
   const { t } = useTranslation();
@@ -47,21 +48,26 @@ export function AdminUsers() {
   const roleColors = { admin: "border-blueberry text-blueberry", teacher: "border-sunshine text-sunshine-800", student: "border-mint text-mint-700", parent: "border-sky text-sky-700" };
 
   if (loading) {
-    return <div className="text-center py-20 text-muted-foreground animate-pulse">Loading users...</div>;
+    return (
+      <div className="space-y-6">
+        <PageHeader eyebrow={t("nav.users")} title="Manage accounts" description="Create and manage accounts for all roles." />
+        <div className="text-center py-20 text-muted-foreground animate-pulse">Loading users...</div>
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <span className="eyebrow">Users</span>
-          <h1 className="text-2xl font-bold text-blueberry">Manage accounts</h1>
-          <p className="text-muted-foreground">Create and manage accounts for all roles.</p>
-        </div>
-        <button className="flex items-center gap-2 px-4 py-3 rounded-xl bg-blueberry text-white font-medium hover:bg-blueberry/90 transition-colors touch-target">
-          <UserPlus className="w-4 h-4" /> Add User
-        </button>
-      </div>
+      <PageHeader
+        eyebrow={t("nav.users")}
+        title="Manage accounts"
+        description="Create and manage accounts for all roles."
+        actions={
+          <button className="flex items-center gap-2 px-4 py-3 rounded-xl bg-blueberry text-white font-medium hover:bg-blueberry/90 transition-colors touch-target">
+            <UserPlus className="w-4 h-4" /> Add User
+          </button>
+        }
+      />
 
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />

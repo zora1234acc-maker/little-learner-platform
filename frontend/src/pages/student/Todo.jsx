@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Play, FileText, Clock, CheckCircle2 } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export function StudentTodo() {
   const { t } = useTranslation();
@@ -21,11 +22,11 @@ export function StudentTodo() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <span className="eyebrow">My To-do</span>
-        <h1 className="text-2xl font-bold text-blueberry">Your assignments</h1>
-        <p className="text-muted-foreground">Lessons, quizzes and work to complete.</p>
-      </div>
+      <PageHeader
+        eyebrow={t("nav.library")}
+        title="My To-do"
+        description="Lessons, quizzes and work to complete."
+      />
 
       <div className="space-y-4">
         {assignments.map((a) => (

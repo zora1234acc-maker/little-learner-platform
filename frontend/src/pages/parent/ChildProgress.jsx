@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, CheckCircle2, Clock, Mail } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export function ParentChildProgress() {
   const { t } = useTranslation();
@@ -15,11 +16,13 @@ export function ParentChildProgress() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <nav className="flex items-center gap-2">
+      <nav className="flex items-center gap-2 mb-6">
         <Link to="/parent" className="flex items-center gap-1 p-2 rounded-lg border border-border hover:bg-accent">
           <ArrowLeft className="w-4 h-4" /> {t("common.back")}
         </Link>
       </nav>
+
+      <PageHeader eyebrow={t("nav.classProgress")} title="Child Progress" />
 
       <div className="card">
         <div className="flex items-center gap-4 mb-6">

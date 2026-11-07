@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export function ParentChildren() {
   const { t } = useTranslation();
@@ -12,13 +13,11 @@ export function ParentChildren() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <span className="eyebrow">My Children</span>
-          <h1 className="text-2xl font-bold text-blueberry">Your children</h1>
-          <p className="text-muted-foreground">View progress for your linked children.</p>
-        </div>
-      </div>
+      <PageHeader
+        eyebrow={t("nav.library")}
+        title="My Children"
+        description="View progress for your linked children."
+      />
 
       <div className="space-y-4">
         {children.map((child) => (

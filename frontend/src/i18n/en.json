@@ -9,7 +9,16 @@
     "about": "About",
     "contact": "Contact",
     "login": "Login",
-    "admin": "Admin"
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "content": "Content",
+    "cms": "Website CMS",
+    "grading": "Grading",
+    "library": "Library",
+    "assign": "Assignments",
+    "classProgress": "Class Progress",
+    "logout": "Logout"
   },
   "home": {
     "eyebrow": "Free learning for every child",

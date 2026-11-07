@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, UserCheck } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export function TeacherAssign() {
   const { t } = useTranslation();
@@ -40,14 +41,14 @@ export function TeacherAssign() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <nav className="flex items-center gap-2">
+      <nav className="flex items-center gap-2 mb-6">
         <button onClick={() => navigate(-1)} className="flex items-center gap-1 p-2 rounded-lg border border-border hover:bg-accent">
           <ArrowLeft className="w-4 h-4" /> {t("common.back")}
         </button>
       </nav>
 
       <div className="card">
-        <h1 className="text-2xl font-bold text-blueberry mb-6">Create Assignment</h1>
+        <PageHeader eyebrow={t("nav.assign")} title="Create Assignment" />
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>

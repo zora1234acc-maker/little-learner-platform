@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { PageHeader } from "@/components/PageHeader";
 
 export function StudentProgress() {
   const { t } = useTranslation();
@@ -11,11 +12,11 @@ export function StudentProgress() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <span className="eyebrow">My Progress</span>
-        <h1 className="text-2xl font-bold text-blueberry">Your learning</h1>
-        <p className="text-muted-foreground">See your completion and scores.</p>
-      </div>
+      <PageHeader
+        eyebrow={t("nav.classProgress")}
+        title="My Progress"
+        description="See your completion and scores."
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="card">

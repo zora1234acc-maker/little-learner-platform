@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { CheckCircle2, Clock } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export function TeacherClassProgress() {
   const { t } = useTranslation();
@@ -11,11 +12,11 @@ export function TeacherClassProgress() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <span className="eyebrow">Class Progress</span>
-        <h1 className="text-2xl font-bold text-blueberry">Track your students</h1>
-        <p className="text-muted-foreground">See completion and scores per student.</p>
-      </div>
+      <PageHeader
+        eyebrow={t("nav.classProgress")}
+        title="Track your students"
+        description="See completion and scores per student."
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="card">

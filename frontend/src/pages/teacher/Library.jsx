@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Search, BookOpen } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export function TeacherLibrary() {
   const { t } = useTranslation();
@@ -19,17 +20,17 @@ export function TeacherLibrary() {
   );
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <span className="eyebrow">Library</span>
-          <h1 className="text-2xl font-bold text-blueberry">Browse content</h1>
-          <p className="text-muted-foreground">Browse published content and assign to students.</p>
-        </div>
-        <Link to="/teacher/assign" className="btn-primary touch-target">
-          Create Assignment
-        </Link>
-      </div>
+    <div className="space-y-6">
+      <PageHeader
+        eyebrow={t("nav.library")}
+        title="Browse content"
+        description="Browse published content and assign to students."
+        actions={
+          <Link to="/teacher/assign" className="btn-primary touch-target">
+            Create Assignment
+          </Link>
+        }
+      />
 
       <div className="relative w-full md:w-80 mb-6">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
