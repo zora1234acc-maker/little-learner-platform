@@ -24,6 +24,8 @@ import { TeacherAssign } from "@/pages/teacher/Assign";
 import { TeacherClassProgress } from "@/pages/teacher/ClassProgress";
 import { StudentTodo } from "@/pages/student/Todo";
 import { StudentProgress } from "@/pages/student/Progress";
+import { AssignmentSubmit } from "@/pages/student/AssignmentSubmit";
+import { QuizResult } from "@/pages/student/QuizResult";
 import { ParentChildren } from "@/pages/parent/Children";
 import { ParentChildProgress } from "@/pages/parent/ChildProgress";
 import "@/index.css";
@@ -79,6 +81,8 @@ export function App() {
               <Route element={<SimpleLayout />}>
                 <Route path="/student/todo" element={<RoleRoute allowedRoles={["student"]} element={<StudentTodo />} />} />
                 <Route path="/student/progress" element={<RoleRoute allowedRoles={["student"]} element={<StudentProgress />} />} />
+                <Route path="/student/assign/:assignmentId" element={<RoleRoute allowedRoles={["student"]} element={<AssignmentSubmit />} />} />
+                <Route path="/student/quiz-result/:quizId" element={<RoleRoute allowedRoles={["student"]} element={<QuizResult />} />} />
               </Route>
 
               {/* Parent — SimpleLayout (no sidebar) */}
