@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 59 63% 143%; /* Blueberry #3B3F8F */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 255 71% 48%; /* Sunshine #FFC93C */
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 8.2%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 8.2%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 8.2%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 59 63% 143%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 255 71% 48%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* RTL-specific adjustments */
+[dir="rtl"] {
+  /* Do not mirror: numbers, logos, video controls, maps */
+  .text-right { text-align: left !important; }
+  .text-left { text-align: right !important; }
+}
+
+/* Khmer typography: larger line-height, no word-break issues */
+[lang="km"] {
+  font-family: "Noto Sans Khmer", "Noto Sans", sans-serif;
+  line-height: 1.8;
+}
+
+/* Arabic typography */
+[lang="ar"] {
+  font-family: "Noto Sans Arabic", "Noto Sans", sans-serif;
+  line-height: 1.7;
+}
+
+/* Default body: Nunito */
+body {
+  font-family: "Nunito", system-ui, -apple-system, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Baloo 2", system-ui, -apple-system, sans-serif;
+}

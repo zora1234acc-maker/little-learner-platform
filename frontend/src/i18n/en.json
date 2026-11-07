@@ -1,0 +1,39 @@
+{
+  "site": {
+    "name": "Little Learner",
+    "tagline": "Free learning for every child"
+  },
+  "nav": {
+    "home": "Home",
+    "subjects": "Subjects",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Login",
+    "admin": "Admin"
+  },
+  "home": {
+    "hero_title": "Learn, Play, Grow",
+    "hero_subtitle": "Free lessons, quizzes and assignments for kids in English, Khmer and Arabic.",
+    "cta_start": "Start Learning"
+  },
+  "common": {
+    "language": "Language",
+    "english": "English",
+    "khmer": "ភាសាខ្មែរ",
+    "arabic": "العربية",
+    "rtl_toggle": "Right-to-left layout",
+    "back": "Back",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "try_again": "Try again"
+  },
+  "auth": {
+    "login_title": "Login",
+    "qr_login": "Login with QR code",
+    "pin_login": "Login with PIN",
+    "picture_login": "Login with picture",
+    "no_typing": "No typing required for kids"
+  }
+}

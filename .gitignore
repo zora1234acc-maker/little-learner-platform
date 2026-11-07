@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+dist-ssr/
+*.local
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python / backend (future)
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+backend/instance/
+.backend/
+*.log
+
+# Misc
+.npmrc
+pnpm-lock.yaml
+.turbo
