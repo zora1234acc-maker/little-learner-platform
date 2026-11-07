@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { SectionDivider } from "@/components/SectionDivider";
 
 export function LessonPlayer() {
   const { t } = useTranslation();
@@ -28,31 +29,31 @@ export function LessonPlayer() {
   };
 
   if (loading || !lesson) {
-    return <div className="text-center py-20 text-muted-foreground animate-pulse">{t("common.loading")}</div>;
+    return <div className="text-center py-24 text-muted-foreground animate-pulse">{t("common.loading")}</div>;
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="max-w-2xl mx-auto space-y-10">
       <nav className="flex items-center gap-2">
-        <button onClick={() => navigate(-1)} className="flex items-center gap-1 p-2 rounded-lg border border-border hover:bg-accent">
+        <button onClick={() => navigate(-1)} className="flex items-center gap-1 p-2 rounded-[var(--radius-md)] border border-border hover:bg-accent">
           <ArrowLeft className="w-4 h-4" /> {t("common.back")}
         </button>
       </nav>
 
-      <div className="rounded-xl border border-border bg-card p-6">
-        <h1 className="text-2xl font-bold text-blueberry mb-4">{lesson.title[lang] || lesson.title.en}</h1>
+      <div className="rounded-[var(--radius-xl)] border border-border bg-card p-8">
+        <h1 className="text-3xl font-black text-blueberry mb-5">{lesson.title[lang] || lesson.title.en}</h1>
         {lesson.type === "video" && lesson.video_url ? (
-          <div className="aspect-video w-full rounded-xl bg-muted overflow-hidden mb-4">
+          <div className="aspect-video w-full rounded-[var(--radius-lg)] bg-muted overflow-hidden mb-6">
             <iframe src={lesson.video_url} title="Lesson video" allowFullScreen className="w-full h-full" />
           </div>
         ) : null}
         <div className="prose prose-sm max-w-none text-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: lesson.body[lang] || lesson.body.en }} />
-        <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
+        <div className="mt-10 pt-8 border-t border-border flex items-center justify-between">
           <span className="text-sm text-muted-foreground">{lesson.type === "video" ? "Video lesson" : "Reading lesson"}</span>
           <button
             onClick={markComplete}
             disabled={completed}
-            className={`px-6 py-3 rounded-lg font-medium text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${completed ? "bg-mint text-mint-foreground" : "bg-blueberry text-white hover:bg-blueberry/90"} touch-target`}
+            className={`btn-primary ${completed ? "opacity-50 cursor-not-allowed" : ""}`}
           >
             {completed ? <CheckCircle2 className="w-4 h-4 mr-2" /> : ""} {completed ? "Completed!" : "Mark Complete"}
           </button>

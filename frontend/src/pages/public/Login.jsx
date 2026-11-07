@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import { QrCode, Pin, Image, Lock, AlertTriangle } from "lucide-react";
+import { SectionDivider } from "@/components/SectionDivider";
 
 export function Login() {
   const { t } = useTranslation();
@@ -44,19 +45,19 @@ export function Login() {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-paper px-4">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
+      <div className="max-w-md w-full space-y-10">
         <div className="text-left">
-          <div className="w-16 h-16 rounded-2xl bg-blueberry flex items-center justify-center mb-6">
+          <div className="w-16 h-16 rounded-[var(--radius-lg)] bg-blueberry flex items-center justify-center mb-6">
             <span className="text-white text-2xl">📚</span>
           </div>
-          <h2 className="text-3xl font-bold text-blueberry">{t("auth.login_title")}</h2>
-          <p className="text-muted-foreground mt-2">{t("auth.no_typing")}</p>
+          <h2 className="text-3xl font-black text-blueberry">{t("auth.login_title")}</h2>
+          <p className="text-muted-foreground mt-3">{t("auth.no_typing")}</p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-5">
+        <form onSubmit={handleLogin} className="space-y-6">
           {error && (
-            <div className="rounded-xl bg-bubblegum/10 p-4 border border-bubblegum/50 text-bubblegum-700 flex items-start gap-3 text-sm">
+            <div className="rounded-[var(--radius-lg)] bg-bubblegum/10 p-5 border border-bubblegum/50 text-bubblegum-700 flex items-start gap-3 text-sm">
               <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" /> {error}
             </div>
           )}
@@ -68,7 +69,7 @@ export function Login() {
                 <button
                   key={m.id}
                   onClick={() => setMode(m.id)}
-                  className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${mode === m.id ? "bg-blueberry text-white border-blueberry" : "border border-border bg-background hover:bg-accent"} touch-target`}
+                  className={`flex-1 px-5 py-2.5 rounded-[var(--radius-lg)] text-sm font-medium transition-colors ${mode === m.id ? "bg-blueberry text-white border-blueberry" : "border border-border bg-background hover:bg-accent"} touch-target`}
                 >
                   {m.icon} {m.label}
                 </button>
@@ -109,7 +110,7 @@ export function Login() {
               <input
                 type="text"
                 required
-                className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-blueberry focus:border-transparent outline-none text-center tracking-widest font-mono text-lg"
+                className="w-full px-5 py-3.5 rounded-[var(--radius-lg)] border border-border bg-background text-foreground focus:ring-2 focus:ring-blueberry focus:border-transparent outline-none text-center tracking-widest font-mono text-lg"
                 placeholder="1234"
                 value={pin}
                 onChange={(e) => setPin(e.target.value)}
@@ -121,7 +122,7 @@ export function Login() {
           {mode === "picture" && (
             <div className="space-y-2">
               <label className="field-label">Choose Your Picture</label>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-4 gap-3">
                 {["bear", "cat", "dog", "lion"].map((avatar) => (
                   <button
                     key={avatar}
@@ -129,7 +130,7 @@ export function Login() {
                       setPin(avatar);
                       handleLogin({ preventDefault: () => {} });
                     }}
-                    className={`aspect-square rounded-xl border transition-all ${pin === avatar ? "border-blueberry bg-blueberry/10" : "border-border hover:bg-accent/50"} touch-target`}
+                    className={`aspect-square rounded-[var(--radius-lg)] border border-border transition-all ${pin === avatar ? "border-blueberry bg-blueberry/10" : "hover:bg-accent/50"} touch-target`}
                   >
                     {avatar === "bear" ? "🐻" : avatar === "cat" ? "🐱" : avatar === "dog" ? "🐶" : "🦁"}
                   </button>

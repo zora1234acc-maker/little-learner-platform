@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { BookOpen } from "lucide-react";
+import { SectionDivider } from "@/components/SectionDivider";
 
 export function CourseDetail() {
   const { t } = useTranslation();
@@ -29,44 +30,40 @@ export function CourseDetail() {
   const subject = subjectNames[subjectId] || subjectNames.sub1;
 
   if (loading) {
-    return <div className="text-center py-20 text-muted-foreground animate-pulse">{t("common.loading")}</div>;
+    return <div className="text-center py-24 text-muted-foreground animate-pulse">{t("common.loading")}</div>;
   }
 
   return (
-    <div className="space-y-6">
-      <nav className="flex items-center gap-2 text-sm text-muted-foreground">
+    <div className="space-y-10">
+      <nav className="flex items-center gap-2">
         <Link to="/subjects" className="link-primary">{t("nav.subjects")}</Link>
-        <span>/</span>
+        <span className="text-muted-foreground">/</span>
         <span className="text-foreground font-medium">{subject[lang] || subject.en}</span>
       </nav>
 
-      <h1 className="text-2xl font-bold text-blueberry">{subject[lang] || subject.en}</h1>
+      <h1 className="text-3xl font-black text-blueberry">{subject[lang] || subject.en}</h1>
 
-      {courses.length === 0 ? (
-        <div className="py-20 text-center text-muted-foreground">
-          <p>No courses available yet.</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {courses.map((course) => (
-            <div key={course.id} className="card border-l-4 border-mint group">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="card-icon bg-mint/10 text-mint-600 group-hover:bg-mint transition-colors">
-                  <BookOpen className="w-5 h-5" />
-                </div>
-                <span className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">Course</span>
+      <SectionDivider />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {courses.map((course) => (
+          <div key={course.id} className="card-md border-l-4 border-mint group">
+            <div className="flex items-center gap-4 mb-5">
+              <div className="icon-md bg-mint/10 text-mint-600 group-hover:bg-mint transition-colors">
+                <BookOpen className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-lg text-foreground mb-2">{course.title[lang] || course.title.en}</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Learn the basics of {subject[lang] || subject.en} with interactive lessons and quizzes.
-              </p>
-              <Link to={`/lessons/${course.id}`} className="btn-secondary w-full">
-                Start Course <span className="text-xs">→</span>
-              </Link>
+              <span className="text-xs font-semibold tracking-normal text-muted-foreground uppercase">Course</span>
             </div>
-          ))}
-        </div>
-      )}
+            <h3 className="font-semibold text-lg text-foreground mb-2">{course.title[lang] || course.title.en}</h3>
+            <p className="text-sm text-muted-foreground mb-5">
+              Learn the basics of {subject[lang] || subject.en} with interactive lessons and quizzes.
+            </p>
+            <Link to={`/lessons/${course.id}`} className="btn-secondary w-full">
+              Start Course <span className="text-xs">→</span>
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

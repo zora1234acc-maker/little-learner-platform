@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { BookOpen, Play } from "lucide-react";
+import { SectionDivider } from "@/components/SectionDivider";
 
 export function LessonList() {
   const { t } = useTranslation();
@@ -21,22 +22,24 @@ export function LessonList() {
   }, [courseId]);
 
   if (loading) {
-    return <div className="text-center py-20 text-muted-foreground animate-pulse">{t("common.loading")}</div>;
+    return <div className="text-center py-24 text-muted-foreground animate-pulse">{t("common.loading")}</div>;
   }
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-blueberry">{t("nav.subjects")}</h1>
+    <div className="space-y-10">
+      <h1 className="text-3xl font-black text-blueberry">{t("nav.subjects")}</h1>
 
-      <div className="space-y-4">
+      <SectionDivider />
+
+      <div className="space-y-5">
         {lessons.map((lesson) => (
           <div
             key={lesson.id}
-            className="flex items-center justify-between p-4 rounded-xl border border-border bg-card hover:shadow-sm transition-shadow group cursor-pointer"
+            className="card-sm flex items-center justify-between group cursor-pointer"
             onClick={() => {}}
           >
             <div className="flex items-center gap-4">
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${lesson.type === "video" ? "bg-sky/10 text-sky-600" : "bg-blueberry/10 text-blueberry-600"}`}>
+              <div className={`icon-sm ${lesson.type === "video" ? "bg-sky/10 text-sky-600" : "bg-blueberry/10 text-blueberry-600"}`}>
                 {lesson.type === "video" ? <Play className="w-5 h-5" /> : <BookOpen className="w-5 h-5" />}
               </div>
               <div>
