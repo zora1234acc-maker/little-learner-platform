@@ -41,22 +41,22 @@ export function Home() {
 
       {/* Three feature blocks — not identical cards, varied layout */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="card border-l-4 border-blueberry">
-          <div className="card-icon bg-blueberry/10 text-blueberry">
+        <div className="card group">
+          <div className="card-icon bg-muted/50 text-muted-foreground group-hover:bg-blueberry/10 group-hover:text-blueberry transition-colors">
             <Play className="w-6 h-6" />
           </div>
           <h3 className="font-semibold text-lg text-foreground mb-2">{t("home.cards.lessons.title")}</h3>
           <p className="text-sm text-muted-foreground leading-relaxed">{t("home.cards.lessons.desc")}</p>
         </div>
-        <div className="card border-l-4 border-sky">
-          <div className="card-icon bg-sky/10 text-sky-600">
+        <div className="card group">
+          <div className="card-icon bg-muted/50 text-muted-foreground group-hover:bg-sunshine/10 group-hover:text-sunshine transition-colors">
             <BookOpen className="w-6 h-6" />
           </div>
           <h3 className="font-semibold text-lg text-foreground mb-2">{t("home.cards.quizzes.title")}</h3>
           <p className="text-sm text-muted-foreground leading-relaxed">{t("home.cards.quizzes.desc")}</p>
         </div>
-        <div className="card border-l-4 border-mint">
-          <div className="card-icon bg-mint/10 text-mint-600">
+        <div className="card group">
+          <div className="card-icon bg-muted/50 text-muted-foreground group-hover:bg-mint/10 group-hover:text-mint transition-colors">
             <Globe className="w-6 h-6" />
           </div>
           <h3 className="font-semibold text-lg text-foreground mb-2">{t("home.cards.languages.title")}</h3>

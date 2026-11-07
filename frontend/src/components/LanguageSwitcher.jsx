@@ -37,7 +37,7 @@ export function LanguageSwitcher() {
     <div className="relative inline-block">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-background text-foreground hover:bg-accent transition-colors"
+        className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-background text-foreground hover:bg-accent transition-colors focus-visible:outline-none focus-visible:ring-0"
       >
         <Globe className="w-4 h-4" />
         <span className="text-sm font-medium">{t("common.language")}</span>

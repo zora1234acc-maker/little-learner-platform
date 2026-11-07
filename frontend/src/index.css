@@ -19,16 +19,16 @@
     --foreground: 26 27 46 / 100%;
     --card: 0 0% 100%;
     --card-foreground: 26 27 46 / 100%;
-    --primary: var(--color-blueberry);
+    --primary: 59 63 143 / 100%;
     --primary-foreground: 255 255 255 / 100%;
     --secondary: 246 248 255 / 100%;
     --secondary-foreground: 26 27 46 / 100%;
-    --accent: var(--color-sunshine);
+    --accent: 255 201 60 / 100%;
     --accent-foreground: 26 27 46 / 100%;
     --muted: 246 248 255 / 100%;
     --muted-foreground: 120 125 150 / 100%;
-    --border: 220 225 235 / 100%;
-    --input: 220 225 235 / 100%;
+    --border: 229 231 235 / 100%;
+    --input: 229 231 235 / 100%;
     --ring: 59 63 143 / 100%;
     --radius: 0.5rem;
   }
@@ -130,9 +130,9 @@
     @apply w-12 h-12 rounded-xl flex items-center justify-center mb-4;
   }
 
-  /* Section eyebrow — small label above heading */
+  /* Section eyebrow — subtle label above heading, sentence case */
   .eyebrow {
-    @apply text-xs font-semibold tracking-wider uppercase text-blueberry mb-2 block;
+    @apply text-xs font-semibold tracking-wider text-muted-foreground mb-2 block;
   }
 
   /* Input — large touch target */
