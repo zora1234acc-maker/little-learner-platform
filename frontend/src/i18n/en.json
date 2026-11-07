@@ -25,11 +25,32 @@
     "hero_title": "Learn, Play, Grow",
     "hero_subtitle": "Lessons, quizzes and assignments for kids in English, Khmer and Arabic — built for phones, not just computers.",
     "cta_start": "Start Learning",
+    "stats": {
+      "subjects": "Subjects",
+      "lessons": "Lessons",
+      "quizzes": "Quizzes",
+      "languages": "Languages"
+    },
     "cards": {
       "lessons": { "title": "Lessons", "desc": "Video and reading lessons for early learners." },
       "quizzes": { "title": "Quizzes", "desc": "Auto-scored quizzes with instant feedback." },
       "languages": { "title": "3 Languages", "desc": "English, Khmer and Arabic with full RTL support." }
     },
+    "featured": "Featured",
+    "featured_subjects": "Popular Subjects",
+    "view_all": "View All",
+    "subj_desc": {
+      "khmer": "Learn to read and write Khmer",
+      "math": "Basic math for early learners",
+      "science": "Explore the world around us"
+    },
+    "recent": "Recent",
+    "recent_lessons": "Recent Lessons",
+    "video": "Video",
+    "reading": "Reading",
+    "start": "Start Lesson",
+    "cta_title": "Ready to start learning?",
+    "cta_desc": "Join thousands of kids learning in English, Khmer and Arabic.",
     "how_works": "How it works",
     "how_works_title": "Four steps to learn",
     "steps": {
