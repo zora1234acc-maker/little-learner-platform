@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Clock, UserCheck } from "lucide-react";
+import { ArrowLeft, UserCheck } from "lucide-react";
 
 export function TeacherAssign() {
   const { t } = useTranslation();
@@ -9,14 +9,13 @@ export function TeacherAssign() {
   const navigate = useNavigate();
   const [itemType, setItemType] = useState("lesson");
   const [itemId, setItemId] = useState("");
-  const [students, setStudents] = useState([]);
   const [dueDate, setDueDate] = useState("");
   const [title, setTitle] = useState("");
   const [instructions, setInstructions] = useState("");
 
   const allStudents = [
-    { id: "u3", full_name: "Sophal", avatar: "bear" },
-    { id: "u4", full_name: "Sophea", avatar: "cat" }
+    { id: "u3", full_name: "Sophal", avatar: "🐻" },
+    { id: "u4", full_name: "Sophea", avatar: "🐱" }
   ];
 
   const items = {
@@ -36,30 +35,29 @@ export function TeacherAssign() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStudents(allStudents); // mock: assign to all
     navigate("/teacher/grading");
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="max-w-2xl mx-auto space-y-6">
       <nav className="flex items-center gap-2">
-        <button onClick={() => navigate(-1)} className="flex items-center gap-1 p-2 rounded-md border border-border hover:bg-accent">
+        <button onClick={() => navigate(-1)} className="flex items-center gap-1 p-2 rounded-lg border border-border hover:bg-accent">
           <ArrowLeft className="w-4 h-4" /> {t("common.back")}
         </button>
       </nav>
 
-      <div className="rounded-xl border border-border bg-card p-6">
+      <div className="card">
         <h1 className="text-2xl font-bold text-blueberry mb-6">Create Assignment</h1>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Item Type</label>
+            <label className="field-label">Item Type</label>
             <div className="flex gap-2">
               {["lesson", "quiz", "assignment"].map((type) => (
                 <button
                   key={type}
                   onClick={() => setItemType(type)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${itemType === type ? "bg-blueberry text-white border-blueberry" : "border border-border bg-background hover:bg-accent"}`}
+                  className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${itemType === type ? "bg-blueberry text-white border-blueberry" : "border border-border bg-background hover:bg-accent"} touch-target`}
                 >
                   {type}
                 </button>
@@ -68,11 +66,11 @@ export function TeacherAssign() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Select Item</label>
+            <label className="field-label">Select Item</label>
             <select
               value={itemId}
               onChange={(e) => setItemId(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-blueberry outline-none"
+              className="input-field"
             >
               {currentItems.map((item) => (
                 <option key={item.id} value={item.id}>{item.title[lang] || item.title.en}</option>
@@ -81,45 +79,45 @@ export function TeacherAssign() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Title</label>
+            <label className="field-label">Title</label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-blueberry outline-none"
+              className="input-field"
               placeholder="Assignment title"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Instructions</label>
+            <label className="field-label">Instructions</label>
             <textarea
               value={instructions}
               onChange={(e) => setInstructions(e.target.value)}
               rows={3}
-              className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-blueberry outline-none"
+              className="input-field h-24"
               placeholder="What should the student do?"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Due Date</label>
+            <label className="field-label">Due Date</label>
             <input
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-blueberry outline-none"
+              className="input-field"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Assign to Students</label>
+            <label className="field-label">Assign to Students</label>
             <div className="space-y-2">
               {allStudents.map((s) => (
                 <label key={s.id} className="flex items-center gap-3 cursor-pointer">
                   <input type="checkbox" className="w-4 h-4 rounded border-border text-blueberry focus:ring-blueberry" defaultChecked />
                   <div className="flex items-center gap-2">
-                    <span className="w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center text-xs">{s.avatar}</span>
+                    <span className="w-8 h-8 rounded-lg bg-muted/40 flex items-center justify-center text-xs">{s.avatar}</span>
                     <span className="text-foreground">{s.full_name}</span>
                   </div>
                 </label>
@@ -127,7 +125,7 @@ export function TeacherAssign() {
             </div>
           </div>
 
-          <button type="submit" className="w-full py-3 rounded-lg bg-blueberry text-white font-semibold hover:bg-blueberry/90 transition-colors">
+          <button type="submit" className="w-full btn-primary touch-target">
             <UserCheck className="w-4 h-4 mr-2" /> Assign to Selected Students
           </button>
         </form>

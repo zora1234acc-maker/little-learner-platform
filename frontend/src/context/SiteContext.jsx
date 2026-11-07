@@ -23,12 +23,11 @@ export function SiteProvider({ children }) {
       ]);
       setSettings(siteRes.data.settings);
       // Split menus by location
-      const header = menuRes.data.filter((m) => m.url === "/" || m.label === "Home" || m.label === "ទំព័រដើម" || m.label === "الرئيسية" || m.position <= 4);
-      const footer = menuRes.data.filter((m) => m.position > 4 || m.url.includes("privacy") || m.url.includes("retention") || m.label.includes("Privacy") || m.label.includes("Retention") || m.label.includes("ឯកជន") || m.label.includes("خصوصية"));
+      const header = menuRes.data.filter((m) => m.position <= 4);
+      const footer = menuRes.data.filter((m) => m.position > 4);
       setMenus({ header, footer });
     } catch (e) {
       console.warn("Failed to load site data", e);
-      // fallback to defaults
       setSettings(siteSettingsDefault);
       setMenus({ header: [], footer: [] });
     } finally {
@@ -36,19 +35,10 @@ export function SiteProvider({ children }) {
     }
   };
 
-  const changeLang = async (newLang) => {
+  const changeLang = (newLang) => {
     setLang(newLang);
     localStorage.setItem("lang", newLang);
-    document.documentElement.setAttribute("lang", newLang);
-    await loadSite(newLang);
-    if (newLang === "ar") {
-      document.documentElement.setAttribute("dir", "rtl");
-      document.body.classList.add("rtl");
-    } else {
-      document.documentElement.setAttribute("dir", "ltr");
-      document.body.classList.remove("rtl");
-    }
-    window.location.reload();
+    loadSite(newLang);
   };
 
   const value = {

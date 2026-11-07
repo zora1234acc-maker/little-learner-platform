@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { Clock, Play, FileText, CheckCircle2 } from "lucide-react";
+import { Play, FileText, Clock, CheckCircle2 } from "lucide-react";
 
 export function StudentTodo() {
   const { t } = useTranslation();
+  const lang = localStorage.getItem("lang") || "en";
 
   const assignments = [
     { id: "a1", title: { en: "Learn Khmer Alphabet", km: "រៀនអក្សរខ្មែរ", ar: "تعلم الحروف الخميرية" }, type: "lesson", due: "Nov 20", status: "not_started" },
@@ -12,27 +12,26 @@ export function StudentTodo() {
     { id: "a3", title: { en: "Draw a Plant", km: "គូរស្លឹង", ar: "ارسم نباتًا" }, type: "assignment", due: "Dec 01", status: "submitted" }
   ];
 
-  const lang = localStorage.getItem("lang") || "en";
-
   const statusColors = {
-    not_started: "bg-muted/50 text-muted-foreground",
-    in_progress: "bg-sunshine/10 text-sunshine-700 border-sunshine/20",
-    submitted: "bg-sky/10 text-sky-700 border-sky/20",
-    graded: "bg-mint/10 text-mint-700 border-mint/20"
+    not_started: "bg-muted/40 text-muted-foreground border border-muted/40",
+    in_progress: "bg-sunshine/10 text-sunshine-800 border border-sunshine/20",
+    submitted: "bg-sky/10 text-sky-700 border border-sky/20",
+    graded: "bg-mint/10 text-mint-700 border border-mint/20"
   };
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-blueberry">My To-do</h1>
-        <p className="text-muted-foreground">Your assignments and lessons.</p>
+        <span className="eyebrow">My To-do</span>
+        <h1 className="text-2xl font-bold text-blueberry">Your assignments</h1>
+        <p className="text-muted-foreground">Lessons, quizzes and work to complete.</p>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-4">
         {assignments.map((a) => (
           <div key={a.id} className="flex items-center justify-between p-4 rounded-xl border border-border bg-card hover:shadow-sm transition-shadow group">
             <div className="flex items-center gap-4">
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${a.type === "lesson" ? "bg-blueberry-50 text-blueberry-600" : a.type === "quiz" ? "bg-sunshine-50 text-sunshine-600" : "bg-sky-50 text-sky-600"}`}>
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${a.type === "lesson" ? "bg-blueberry/10 text-blueberry-600" : a.type === "quiz" ? "bg-sunshine/10 text-sunshine-600" : "bg-sky/10 text-sky-600"}`}>
                 {a.type === "lesson" ? <Play className="w-5 h-5" /> : a.type === "quiz" ? <FileText className="w-5 h-5" /> : <Clock className="w-5 h-5" />}
               </div>
               <div>
@@ -41,13 +40,13 @@ export function StudentTodo() {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <span className={`px-2 py-1 rounded text-xs font-medium border ${statusColors[a.status]}`}>
+              <span className={`px-2.5 py-1 rounded-md text-xs font-medium border ${statusColors[a.status]}`}>
                 {a.status.replace("_", " ")}
               </span>
               {a.status === "submitted" ? (
                 <CheckCircle2 className="w-4 h-4 text-mint-600" />
               ) : (
-                <Link to={`/student/assign/${a.id}`} className="px-4 py-2 rounded-lg bg-blueberry text-white text-sm font-medium hover:bg-blueberry/90 transition-colors">
+                <Link to={`/student/assign/${a.id}`} className="btn-secondary touch-target">
                   Start
                 </Link>
               )}

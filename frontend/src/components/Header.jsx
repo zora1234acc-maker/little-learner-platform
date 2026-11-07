@@ -7,11 +7,10 @@ import { useSite } from "../context/SiteContext";
 
 export function Header() {
   const { t } = useTranslation();
-  const { menus, lang, changeLang, t: siteT } = useSite();
+  const { menus } = useSite();
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
-  // Use CMS menu data if available, fall back to defaults
   const headerItems = menus.header.length > 0
     ? menus.header.filter((m) => m.position <= 5)
     : [
@@ -23,14 +22,14 @@ export function Header() {
       ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-blur]:bg-background/80">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md supports-[backdrop-blur]:bg-background/80">
       <div className="flex flex-wrap items-center justify-between gap-4 px-4 py-3">
         <Link
           to="/"
           className="flex items-center gap-2 font-bold text-xl tracking-tight text-blueberry"
         >
           <GraduationCap className="w-6 h-6" />
-          <span>{siteT ? siteT({ en: "Little Learner", km: "Little Learner", ar: "ليتل ليرنر" }) : "Little Learner"}</span>
+          <span>Little Learner</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">

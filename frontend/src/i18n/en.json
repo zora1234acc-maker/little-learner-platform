@@ -12,13 +12,22 @@
     "admin": "Admin"
   },
   "home": {
+    "eyebrow": "Free learning for every child",
     "hero_title": "Learn, Play, Grow",
-    "hero_subtitle": "Free lessons, quizzes and assignments for kids in English, Khmer and Arabic.",
+    "hero_subtitle": "Lessons, quizzes and assignments for kids in English, Khmer and Arabic — built for phones, not just computers.",
     "cta_start": "Start Learning",
     "cards": {
       "lessons": { "title": "Lessons", "desc": "Video and reading lessons for early learners." },
       "quizzes": { "title": "Quizzes", "desc": "Auto-scored quizzes with instant feedback." },
       "languages": { "title": "3 Languages", "desc": "English, Khmer and Arabic with full RTL support." }
+    },
+    "how_works": "How it works",
+    "how_works_title": "Four steps to learn",
+    "steps": {
+      "1": { "title": "Admin creates content", "desc": "Lessons, quizzes and assignments in three languages." },
+      "2": { "title": "Teacher assigns work", "desc": "Pick lessons, set due dates, assign to students." },
+      "3": { "title": "Student learns", "desc": "Do lessons, take quizzes, submit work." },
+      "4": { "title": "Parent watches", "desc": "See progress, scores and feedback." }
     }
   },
   "common": {
@@ -30,6 +39,7 @@
     "back": "Back",
     "submit": "Submit",
     "cancel": "Cancel",
+    "search": "Search",
     "loading": "Loading...",
     "error": "Something went wrong",
     "try_again": "Try again"

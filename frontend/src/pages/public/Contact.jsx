@@ -14,14 +14,21 @@ export function Contact() {
   }, []);
 
   if (loading || !page) {
-    return <div className="text-center py-20 text-muted-foreground animate-pulse">{t("common.loading")}</div>;
+    return (
+      <div className="py-20">
+        <span className="eyebrow">{t("nav.contact")}</span>
+        <h1 className="text-2xl font-bold text-blueberry">{t("nav.contact")}</h1>
+        <p className="text-muted-foreground animate-pulse">{t("common.loading")}</p>
+      </div>
+    );
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="space-y-8">
+      <span className="eyebrow">{t("nav.contact")}</span>
       <h1 className="text-2xl font-bold text-blueberry">{page.title}</h1>
       {page.sections.map((section) => (
-        <div key={section.id} className="prose prose-sm max-w-none text-foreground" dangerouslySetInnerHTML={{ __html: section.content }} />
+        <div key={section.id} className="prose prose-sm max-w-none text-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: section.content }} />
       ))}
     </div>
   );

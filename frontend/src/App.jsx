@@ -26,7 +26,6 @@ import { ParentChildren } from "@/pages/parent/Children";
 import { ParentChildProgress } from "@/pages/parent/ChildProgress";
 import "@/index.css";
 
-// Role-based wrapper
 function RoleRoute({ element: Element, allowedRoles }) {
   const { user, isAuthenticated, loading } = useAuth();
   if (loading) return null;

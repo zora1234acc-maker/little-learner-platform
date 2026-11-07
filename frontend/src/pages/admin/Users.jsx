@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { api } from "../../api/client";
-import { Search, UserPlus, Trash2, Edit3, ShieldCheck } from "lucide-react";
+import { Search, UserPlus, Trash2, Edit3 } from "lucide-react";
 
 export function AdminUsers() {
   const { t } = useTranslation();
@@ -44,7 +44,7 @@ export function AdminUsers() {
     }
   };
 
-  const roleColors = { admin: "text-blueberry", teacher: "text-sunshine", student: "text-mint-600", parent: "text-sky-600" };
+  const roleColors = { admin: "border-blueberry text-blueberry", teacher: "border-sunshine text-sunshine-800", student: "border-mint text-mint-700", parent: "border-sky text-sky-700" };
 
   if (loading) {
     return <div className="text-center py-20 text-muted-foreground animate-pulse">Loading users...</div>;
@@ -54,10 +54,11 @@ export function AdminUsers() {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-blueberry">Users</h1>
+          <span className="eyebrow">Users</span>
+          <h1 className="text-2xl font-bold text-blueberry">Manage accounts</h1>
           <p className="text-muted-foreground">Create and manage accounts for all roles.</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blueberry text-white font-medium hover:bg-blueberry/90 transition-colors">
+        <button className="flex items-center gap-2 px-4 py-3 rounded-xl bg-blueberry text-white font-medium hover:bg-blueberry/90 transition-colors touch-target">
           <UserPlus className="w-4 h-4" /> Add User
         </button>
       </div>
@@ -69,13 +70,13 @@ export function AdminUsers() {
           placeholder="Search by name or email..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-2 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-blueberry outline-none"
+          className="w-full pl-10 pr-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-blueberry focus:border-transparent outline-none text-base"
         />
       </div>
 
-      <div className="rounded-xl border border-border bg-card overflow-hidden">
+      <div className="card overflow-hidden">
         <table className="w-full text-left text-sm">
-          <thead className="bg-muted/50">
+          <thead className="bg-muted/40">
             <tr>
               <th className="px-4 py-3 font-medium text-muted-foreground">Name</th>
               <th className="px-4 py-3 font-medium text-muted-foreground">Email</th>
@@ -86,17 +87,19 @@ export function AdminUsers() {
           </thead>
           <tbody>
             {filtered.map((u) => (
-              <tr key={u.id} className="border-b border-border hover:bg-accent/50 transition-colors">
+              <tr key={u.id} className="border-b border-border hover:bg-accent/40 transition-colors">
                 <td className="px-4 py-3">{u.full_name}</td>
                 <td className="px-4 py-3 text-muted-foreground">{u.email}</td>
                 <td className="px-4 py-3">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium border ${roleColors[u.role] || "text-muted-foreground"} border-${roleColors[u.role] ? roleColors[u.role].replace("text-", "") : "muted"}/20`}>
+                  <span className={`px-2.5 py-1 rounded-md text-xs font-medium border ${roleColors[u.role] || "border-muted text-muted-foreground"}`}>
                     {u.role}
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  <span className={`w-2 h-2 rounded-full ${u.is_active ? "bg-mint" : "bg-muted"}`} />
-                  {u.is_active ? "Active" : "Inactive"}
+                  <span className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs font-medium ${u.is_active ? "bg-mint/10 text-mint-700 border border-mint/20" : "bg-muted/10 text-muted-foreground border border-muted/20"}`}>
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: u.is_active ? "#2FBF94" : "#cbd5e1" }} />
+                    {u.is_active ? "Active" : "Inactive"}
+                  </span>
                 </td>
                 <td className="px-4 py-3 text-right">
                   {editing === u.id ? (
@@ -104,17 +107,17 @@ export function AdminUsers() {
                       <input
                         value={form.full_name}
                         onChange={(e) => setForm({ ...form, full_name: e.target.value })}
-                        className="px-2 py-1 border rounded text-sm w-24"
+                        className="px-3 py-2 border rounded-lg text-sm w-32 focus:ring-2 focus:ring-blueberry"
                       />
-                      <button onClick={saveEdit} className="px-2 py-1 bg-mint text-mint-foreground rounded text-xs hover:bg-mint/90">Save</button>
-                      <button onClick={() => setEditing(null)} className="px-2 py-1 text-muted-foreground hover:bg-accent rounded text-xs">Cancel</button>
+                      <button onClick={saveEdit} className="px-3 py-2 bg-mint text-white rounded-lg text-xs font-medium hover:bg-mint/90 transition-colors touch-target">Save</button>
+                      <button onClick={() => setEditing(null)} className="px-3 py-2 text-muted-foreground rounded-lg hover:bg-accent transition-colors touch-target">Cancel</button>
                     </div>
                   ) : (
                     <div className="flex gap-1">
-                      <button onClick={() => openEdit(u)} className="p-2 text-muted-foreground hover:text-blueberry hover:bg-blueberry/10 rounded transition-colors" title="Edit">
+                      <button onClick={() => openEdit(u)} className="p-2 text-muted-foreground hover:text-blueberry hover:bg-blueberry/10 rounded-lg transition-colors touch-target" title="Edit">
                         <Edit3 className="w-4 h-4" />
                       </button>
-                      <button onClick={() => deactivate(u.id)} className="p-2 text-muted-foreground hover:text-bubblegum hover:bg-bubblegum/10 rounded transition-colors" title="Deactivate">
+                      <button onClick={() => deactivate(u.id)} className="p-2 text-muted-foreground hover:text-bubblegum hover:bg-bubblegum/10 rounded-lg transition-colors touch-target" title="Deactivate">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>

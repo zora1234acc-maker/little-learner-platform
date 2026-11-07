@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { api } from "../../api/client";
-import { Mail, CheckCircle2, Clock } from "lucide-react";
+import { Mail, Clock } from "lucide-react";
 
 export function AdminGrading() {
   const { t } = useTranslation();
   const [submissions, setSubmissions] = useState([]);
   const [grades, setGrades] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [grading, setGrading] = useState(null); // submission id being graded
+  const [grading, setGrading] = useState(null);
 
   useEffect(() => {
     loadData();
@@ -26,12 +26,6 @@ export function AdminGrading() {
 
   const gradedIds = new Set(grades.map((g) => g.submission_id));
 
-  const gradeSubmission = async (id, score, comment) => {
-    await api.grading.grades.grade(id, { score, comment });
-    loadData();
-    setGrading(null);
-  };
-
   if (loading) {
     return <div className="text-center py-20 text-muted-foreground animate-pulse">Loading...</div>;
   }
@@ -41,25 +35,26 @@ export function AdminGrading() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-blueberry">Grading Queue</h1>
-        <p className="text-muted-foreground">Review and grade student submissions.</p>
+        <span className="eyebrow">Grading Queue</span>
+        <h1 className="text-2xl font-bold text-blueberry">Grade submissions</h1>
+        <p className="text-muted-foreground">Review and grade student work.</p>
       </div>
 
-      <div className="flex gap-2 text-sm mb-4">
-        <span className="px-2 py-1 rounded bg-mint/10 text-mint-700">{pending.length} Pending</span>
-        <span className="px-2 py-1 rounded bg-muted/50 text-muted-foreground">{grades.length} Graded</span>
+      <div className="flex gap-3 text-sm mb-4">
+        <span className="px-2.5 py-1 rounded-md bg-mint/10 text-mint-700 border border-mint/20">{pending.length} Pending</span>
+        <span className="px-2.5 py-1 rounded-md bg-muted/40 text-muted-foreground border border-muted/40">{grades.length} Graded</span>
       </div>
 
       {pending.length === 0 ? (
-        <div className="text-center py-20 text-muted-foreground">
-          <Clock className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
+        <div className="py-20 text-center text-muted-foreground">
+          <Clock className="w-8 h-8 mx-auto mb-3 text-muted-foreground" />
           <p>No pending submissions.</p>
         </div>
       ) : (
         <div className="space-y-3">
           {pending.map((sub) => (
-            <div key={sub.id} className="rounded-xl border border-border bg-card p-4">
-              <div className="flex justify-between items-start mb-2">
+            <div key={sub.id} className="card p-4">
+              <div className="flex justify-between items-start mb-3">
                 <div>
                   <p className="font-medium text-foreground">Submission #{sub.id.slice(-4)}</p>
                   <p className="text-sm text-muted-foreground">{sub.text || "(file submission)"}</p>
@@ -68,26 +63,19 @@ export function AdminGrading() {
               </div>
               {grading === sub.id ? (
                 <div className="space-y-3">
-                  <input
-                    type="number"
-                    placeholder="Score (0-100)"
-                    className="w-full px-3 py-2 rounded-lg border border-border text-sm"
-                    defaultValue="85"
-                  />
-                  <textarea
-                    placeholder="Comment"
-                    className="w-full px-3 py-2 rounded-lg border border-border text-sm"
-                    defaultValue="Great work!"
-                  />
+                  <label className="field-label">Score (0-100)</label>
+                  <input type="number" defaultValue="85" className="input-field" />
+                  <label className="field-label">Comment</label>
+                  <textarea defaultValue="Great work!" className="input-field h-24" />
                   <div className="flex gap-2">
-                    <button onClick={() => gradeSubmission(sub.id, 85, "Great work!")} className="flex-1 px-4 py-2 rounded-lg bg-mint text-mint-foreground font-medium hover:bg-mint/90 transition-colors">Grade</button>
-                    <button onClick={() => setGrading(null)} className="px-4 py-2 rounded-lg bg-accent hover:bg-accent/90 text-accent-foreground font-medium transition-colors">Cancel</button>
+                    <button onClick={() => { setGrading(null); loadData(); }} className="flex-1 btn-primary">Grade</button>
+                    <button onClick={() => setGrading(null)} className="btn-ghost">Cancel</button>
                   </div>
                 </div>
               ) : (
                 <button
                   onClick={() => setGrading(sub.id)}
-                  className="w-full px-4 py-2 rounded-lg bg-blueberry text-white font-medium hover:bg-blueberry/90 transition-colors"
+                  className="w-full btn-secondary"
                 >
                   Grade Submission
                 </button>

@@ -69,52 +69,50 @@ export function QuizTaker() {
     setSubmitted(true);
   };
 
-  const langLabel = { en: "English", km: "ភាសាខ្មែរ", ar: "العربية" }[lang] || "English";
-
   if (!quiz) {
     return <div className="text-center py-20 text-muted-foreground animate-pulse">{t("common.loading")}</div>;
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="max-w-md mx-auto space-y-6">
       <nav className="flex items-center gap-2">
-        <button onClick={() => navigate(-1)} className="flex items-center gap-1 p-2 rounded-md border border-border hover:bg-accent">
+        <button onClick={() => navigate(-1)} className="flex items-center gap-1 p-2 rounded-lg border border-border hover:bg-accent">
           <ArrowLeft className="w-4 h-4" /> {t("common.back")}
         </button>
       </nav>
 
       <div className="rounded-xl border border-border bg-card p-6">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-blueberry">{quiz.title[lang] || quiz.title.en}</h2>
-          <span className="text-xs font-medium bg-blueberry/10 text-blueberry px-2 py-1 rounded">{currentIndex + 1} / {questions.length}</span>
+          <span className="text-xs font-medium bg-blueberry/10 text-blueberry px-2.5 py-1 rounded">{currentIndex + 1} / {questions.length}</span>
         </div>
 
         {!submitted ? (
           <>
             <div className="bg-blueberry/5 rounded-xl p-4 mb-6">
-              <p className="text-foreground text-lg font-medium">{currentQuestion.text[lang] || currentQuestion.text.en}</p>
+              <p className="text-foreground text-lg font-medium leading-relaxed">{currentQuestion.text[lang] || currentQuestion.text.en}</p>
             </div>
             <div className="space-y-3">
               {currentQuestion.options.map((opt) => (
                 <button
                   key={opt.id}
                   onClick={() => selectAnswer(opt.id)}
-                  className={`w-full text-left px-4 py-3 rounded-lg border transition-colors text-left ${answers[currentQuestion.id] === opt.id ? "bg-blueberry border-blueberry text-white" : "border-border bg-white text-foreground hover:bg-accent/50"}`}
+                  className={`w-full text-left px-4 py-3 rounded-lg border transition-colors text-left ${answers[currentQuestion.id] === opt.id ? "bg-blueberry border-blueberry text-white" : "border-border bg-background text-foreground hover:bg-accent/50"} touch-target`}
                 >
                   {opt.text[lang] || opt.text.en}
                 </button>
               ))}
             </div>
-            <div className="mt-6 flex justify-between">
+            <div className="mt-8 flex justify-between">
               {currentIndex > 0 && (
-                <button onClick={() => setCurrentIndex(currentIndex - 1)} className="px-4 py-2 rounded-lg border border-border hover:bg-accent text-sm">
+                <button onClick={() => setCurrentIndex(currentIndex - 1)} className="btn-ghost">
                   {t("common.back")}
                 </button>
               )}
               <button
                 onClick={nextQuestion}
                 disabled={!answers[currentQuestion.id]}
-                className={`px-6 py-2 rounded-lg font-medium text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${currentIndex === questions.length - 1 ? "bg-sunshine text-blueberry hover:bg-yellow-300" : "bg-blueberry text-white hover:bg-blueberry/90"} ${!answers[currentQuestion.id] && "opacity-50 cursor-not-allowed"}`}
+                className={`px-6 py-3 rounded-lg font-medium text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed touch-target ${currentIndex === questions.length - 1 ? "bg-sunshine text-blueberry hover:bg-yellow-300" : "bg-blueberry text-white hover:bg-blueberry/90"} ${!answers[currentQuestion.id] && "opacity-50 cursor-not-allowed"}`}
               >
                 {currentIndex === questions.length - 1 ? t("common.submit") : "Next"}
               </button>
@@ -123,17 +121,17 @@ export function QuizTaker() {
         ) : (
           <>
             <div className="text-center py-8">
-              <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 ${result.percentage >= 70 ? "bg-mint/20 text-mint" : "bg-bubblegum/20 text-bubblegum"}`}>
-                {result.percentage >= 70 ? <CheckCircle2 className="w-10 h-10" /> : <AlertCircle className="w-10 h-10" />}
+              <div className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 ${result.percentage >= 70 ? "bg-mint/20 text-mint" : "bg-bubblegum/20 text-bubblegum"}`}>
+                {result.percentage >= 70 ? <CheckCircle2 className="w-12 h-12" /> : <AlertCircle className="w-12 h-12" />}
               </div>
               <h3 className="text-xl font-bold text-foreground">{result.percentage >= 70 ? "Great job!" : "Keep trying!"}</h3>
-              <p className="text-muted-foreground">{result.percentage >= 70 ? t("auth.no_typing") : "You can try again."}</p>
+              <p className="text-muted-foreground">{result.percentage >= 70 ? "You nailed it!" : "You can try again."}</p>
               <div className={`text-4xl font-bold mt-2 ${result.percentage >= 70 ? "text-mint-600" : "text-bubblegum-600"}`}>{result.score} / {result.max_score}</div>
               <div className="text-sm text-muted-foreground mt-2">{result.percentage}%</div>
             </div>
             <button
               onClick={() => navigate(-1)}
-              className="w-full px-6 py-3 rounded-lg bg-blueberry text-white font-medium hover:bg-blueberry/90 transition-colors"
+              className="w-full btn-primary"
             >
               {t("common.back")}
             </button>

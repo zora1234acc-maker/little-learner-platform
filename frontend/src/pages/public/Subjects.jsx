@@ -1,53 +1,76 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Search } from "lucide-react";
 import { api } from "../../api/client";
 import { useSite } from "../../context/SiteContext";
 
 export function Subjects() {
   const { t } = useTranslation();
-  const { menus, lang, t: siteT } = useSite();
+  const { lang, t: siteT } = useSite();
   const [subjects, setSubjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+
+  const allSubjects = [
+    { id: "sub1", title: { en: "Khmer Language", km: "ភាសាខ្មែរ", ar: "اللغة الخميرية" }, description: { en: "Learn to read and write Khmer", km: "រៀនអាននិងសរសេរខ្មែរ", ar: "تعلم قراءة وكتابة اللغة الخميرية" } },
+    { id: "sub2", title: { en: "Mathematics", km: "គណិតវិជ្ជា", ar: "الرياضيات" }, description: { en: "Basic math for early learners", km: "គណិតមួយរបស់កុមារចាប់ផ្តើម", ar: "رياضيات أساسية للمتعلمين المبتدئين" } },
+    { id: "sub3", title: { en: "Science", km: "វិទ្យាសាស្ត្រ", ar: "العلوم" }, description: { en: "Explore the world around us", km: "ស្វែងរកពិភពលោកនៅក្នុងយើង", ar: "استكشف العالم من حولنا" } }
+  ];
+
+  const filtered = allSubjects.filter((s) =>
+    s.title[lang].toLowerCase().includes(search.toLowerCase()) ||
+    s.description[lang].toLowerCase().includes(search.toLowerCase())
+  );
 
   useEffect(() => {
-    api.content.subjects.list().then((res) => {
-      setSubjects(res.data);
-      setLoading(false);
-    });
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return <div className="text-center py-20 text-muted-foreground animate-pulse">{t("common.loading")}</div>;
+  }
 
   return (
     <div className="space-y-8">
-      <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-blueberry">{t("nav.subjects")}</h1>
-          <p className="text-muted-foreground">{siteT(subjects.length > 0 ? subjects[0].description : { en: "Choose a subject", km: "ជ្រើសមុខ", ar: "اختر مادة" })}</p>
+          <span className="eyebrow">{t("nav.subjects")}</span>
+          <h1 className="text-2xl font-bold text-blueberry mb-2">Choose a subject</h1>
+          <p className="text-muted-foreground">{t("home.cards.languages.desc")}</p>
         </div>
-        <div className="flex gap-2">{menus.header.map((m) => (
-          <Link key={m.id} to={m.url} className="px-3 py-1.5 rounded-md border border-border hover:bg-accent text-sm">{m.label}</Link>
-        ))}</div>
-      </header>
+        <div className="relative w-full md:w-64">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <input
+            type="text"
+            placeholder={t("common.search")}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full pl-10 pr-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-blueberry focus:border-transparent outline-none text-base"
+          />
+        </div>
+      </div>
 
-      {loading ? (
-        <div className="text-center py-20 text-muted-foreground animate-pulse">{t("common.loading")}</div>
-      ) : subjects.length === 0 ? (
-        <div className="text-center py-20">{t("common.error")}</div>
+      {filtered.length === 0 ? (
+        <div className="py-20 text-center text-muted-foreground">
+          <p>No subjects found.</p>
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {subjects.map((sub) => {
-            const coursesForSubject = []; // will be populated by course links
+          {filtered.map((sub) => {
+            const title = sub.title[lang] || sub.title.en;
+            const desc = sub.description[lang] || sub.description.en;
             return (
-              <div key={sub.id} className="rounded-xl border border-border bg-card p-6 hover:shadow-md transition-shadow group">
-                <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent transition-colors">
-                  <span className="text-blueberry font-bold text-xl">{sub.position}</span>
+              <a
+                key={sub.id}
+                href={`/courses/${sub.id}`}
+                className="card group border-l-4 border-blueberry hover:border-sunshine transition-colors"
+              >
+                <div className="card-icon bg-blueberry/10 text-blueberry group-hover:bg-sunshine transition-colors">
+                  <span className="text-xl">{sub.id === "sub1" ? "📖" : sub.id === "sub2" ? "🔢" : "🔬"}</span>
                 </div>
-                <h3 className="font-semibold text-lg text-foreground mb-2">{sub.title[lang] || sub.title.en}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{sub.description[lang] || sub.description.en}</p>
-                <Link to={`/courses/${sub.id}`} className="inline-flex items-center gap-1 px-4 py-2 rounded-lg border border-blueberry text-blueberry font-medium text-sm hover:bg-blueberry hover:text-white transition-colors">
-                  Browse <span className="text-xs">→</span>
-                </Link>
-              </div>
+                <h3 className="font-semibold text-lg text-foreground mb-2">{title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+              </a>
             );
           })}
         </div>
