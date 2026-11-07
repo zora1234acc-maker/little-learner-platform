@@ -1,0 +1,41 @@
+[
+  {
+    "id": "qa1",
+    "quiz_id": "q1",
+    "text": { "en": "What sound does ក make?", "km": "អក្សរ ក អានថាអ្វី?", "ar": "ما الصوت الذي يصدره حرف كه؟" },
+    "image_url": null,
+    "position": 1,
+    "options": [
+      { "id": "oa1", "text": { "en": "k", "km": "ក", "ar": "ك" }, "is_correct": true },
+      { "id": "oa2", "text": { "en": "s", "km": "ស", "ar": "س" }, "is_correct": false },
+      { "id": "oa3", "text": { "en": "m", "km": "ម", "ar": "م" }, "is_correct": false },
+      { "id": "oa4", "text": { "en": "t", "km": "ត", "ar": "ت" }, "is_correct": false }
+    ]
+  },
+  {
+    "id": "qa2",
+    "quiz_id": "q1",
+    "text": { "en": "Which is the first consonant?", "km": "ណាជាអក្សរដើម?", "ar": "أيهما الحرف الأول؟" },
+    "image_url": null,
+    "position": 2,
+    "options": [
+      { "id": "oa5", "text": { "en": "ក", "km": "ក", "ar": "كه" }, "is_correct": true },
+      { "id": "oa6", "text": { "en": "ខ", "km": "ខ", "ar": "خا" }, "is_correct": false },
+      { "id": "oa7", "text": { "en": "គ", "km": "គ", "ar": "كاف" }, "is_correct": false },
+      { "id": "oa8", "text": { "en": "ឃ", "km": "ឃ", "ar": "خاخ" }, "is_correct": false }
+    ]
+  },
+  {
+    "id": "qa3",
+    "quiz_id": "q2",
+    "text": { "en": "What comes after 3?", "km": "ណានេះមកក្រោយលេខ 3?", "ar": "ما الذي يأتي بعد 3؟" },
+    "image_url": null,
+    "position": 1,
+    "options": [
+      { "id": "oa9", "text": { "en": "4", "km": "៤", "ar": "٤" }, "is_correct": true },
+      { "id": "oa10", "text": { "en": "2", "km": "២", "ar": "٢" }, "is_correct": false },
+      { "id": "oa11", "text": { "en": "5", "km": "៥", "ar": "٥" }, "is_correct": false },
+      { "id": "oa12", "text": { "en": "6", "km": "៦", "ar": "٦" }, "is_correct": false }
+    ]
+  }
+]

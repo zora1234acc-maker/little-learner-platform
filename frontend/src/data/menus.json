@@ -1,0 +1,70 @@
+{
+  "header": [
+    {
+      "id": "m1",
+      "label": { "en": "Home", "km": "ទំព័រដើម", "ar": "الرئيسية" },
+      "url": "/",
+      "position": 1,
+      "parent_id": null,
+      "is_visible": true
+    },
+    {
+      "id": "m2",
+      "label": { "en": "Subjects", "km": "មុខវិជ្ជា", "ar": "المواد" },
+      "url": "/subjects",
+      "position": 2,
+      "parent_id": null,
+      "is_visible": true
+    },
+    {
+      "id": "m3",
+      "label": { "en": "About", "km": "អំពីយើង", "ar": "من نحن" },
+      "url": "/about",
+      "position": 3,
+      "parent_id": null,
+      "is_visible": true
+    },
+    {
+      "id": "m4",
+      "label": { "en": "Contact", "km": "ទំនាក់ទំនង", "ar": "اتصل بنا" },
+      "url": "/contact",
+      "position": 4,
+      "parent_id": null,
+      "is_visible": true
+    },
+    {
+      "id": "m5",
+      "label": { "en": "Login", "km": "បញ្ជូល", "ar": "تسجيل الدخول" },
+      "url": "/login",
+      "position": 5,
+      "parent_id": null,
+      "is_visible": true
+    }
+  ],
+  "footer": [
+    {
+      "id": "f1",
+      "label": { "en": "Privacy for Children", "km": "ឯកជនភាពសម្រាប់កុមារ", "ar": "خصوصية الأطفال" },
+      "url": "/privacy-for-children",
+      "position": 1,
+      "parent_id": null,
+      "is_visible": true
+    },
+    {
+      "id": "f2",
+      "label": { "en": "Data Retention", "km": "ការរាំងទិន្នន័យ", "ar": "احتفاظ البيانات" },
+      "url": "/data-retention",
+      "position": 2,
+      "parent_id": null,
+      "is_visible": true
+    },
+    {
+      "id": "f3",
+      "label": { "en": "Contact", "km": "ទំនាក់ទំនង", "ar": "اتصل بنا" },
+      "url": "/contact",
+      "position": 3,
+      "parent_id": null,
+      "is_visible": true
+    }
+  ]
+}

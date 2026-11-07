@@ -1,0 +1,18 @@
+[
+  {
+    "id": "q1",
+    "lesson_id": "l1",
+    "title": { "en": "Khmer Alphabet Quiz", "km": "ប្រអប់អក្សរខ្មែរ", "ar": "اختبار الحروف الخميرية" },
+    "description": { "en": "Test your knowledge of the first consonant", "km": "ពិនិត្យជំនាញរបស់អ្នកអាចម្ដេចអក្សរដើម", "ar": "اختبر معرفتك بالحرف الساكن الأول" },
+    "position": 1,
+    "is_published": true
+  },
+  {
+    "id": "q2",
+    "lesson_id": "l2",
+    "title": { "en": "Counting Quiz", "km": "ប្រអប់គណនា", "ar": "اختبار العد" },
+    "description": { "en": "Can you count 1 to 5?", "km": "អ្នកអាចគណនា 1 ដល់ 5 ដូចថាមុន?", "ar": "هل يمكنك العد من 1 إلى 5؟" },
+    "position": 1,
+    "is_published": true
+  }
+]

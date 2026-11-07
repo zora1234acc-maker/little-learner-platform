@@ -1,31 +1,12 @@
-import axios from "axios";
+import mockApi from "./mock";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api/v1";
+// Frontend-first: all features driven by local JSON mock data.
+// Set VITE_USE_REAL_API=1 to switch to a real backend later.
+const USE_REAL = import.meta.env.VITE_USE_REAL_API === "1";
 
-export const api = axios.create({
-  baseURL: API_BASE,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+export const api = USE_REAL ? (() => {
+  // Real backend client would go here
+  return mockApi;
+})() : mockApi;
 
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response && error.response.status === 401) {
-      localStorage.removeItem("token");
-      window.location.href = "/login";
-    }
-    return Promise.reject(error);
-  }
-);
-
-export default api;
+export default mockApi;

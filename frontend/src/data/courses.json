@@ -1,0 +1,26 @@
+[
+  {
+    "id": "c1",
+    "subject_id": "sub1",
+    "title": { "en": "Khmer Alphabet", "km": "អក្សរខ្មែរ", "ar": "حروف اللغة الخميرية" },
+    "description": { "en": "Learn all 33 Khmer consonants", "km": "រៀនអក្សរក្រោយប្រាំពីរ 33 អក្សរដែលមានអាណត្តិទិន", "ar": "تعلم جميع الساكنات الخميرة البالغ عددها 33" },
+    "position": 1,
+    "is_published": true
+  },
+  {
+    "id": "c2",
+    "subject_id": "sub2",
+    "title": { "en": "Counting 1-10", "km": "គណនា 1-10", "ar": "العد من 1 إلى 10" },
+    "description": { "en": "Learn to count from 1 to 10", "km": "រៀនគណនាពី 1 ដល់ 10", "ar": "تعلم العد من 1 إلى 10" },
+    "position": 1,
+    "is_published": true
+  },
+  {
+    "id": "c3",
+    "subject_id": "sub3",
+    "title": { "en": "Plants and Animals", "km": "ប្រភេទស្លឹងនិងសត្វ", "ar": "النباتات والحيوانات" },
+    "description": { "en": "Discover plants and animals around you", "km": "លើកស្វែងរកស្លឹងនិងសត្វក្នុងរបស់អ្នក", "ar": "اكتشف النباتات والحيوانات من حولك" },
+    "position": 1,
+    "is_published": true
+  }
+]

@@ -1,0 +1,161 @@
+{
+  "home": {
+    "id": "p1",
+    "slug": "home",
+    "title": { "en": "Home", "km": "ទំព័រដើម", "ar": "الرئيسية" },
+    "status": "published",
+    "sections": [
+      {
+        "id": "s1",
+        "type": "hero",
+        "content": {
+          "en": {
+            "title": "Learn, Play, Grow",
+            "subtitle": "Free lessons, quizzes and assignments for kids in English, Khmer and Arabic.",
+            "cta": "Start Learning",
+            "cta_url": "/subjects"
+          },
+          "km": {
+            "title": "រៀន។ និយាយ។ ឯកសារ",
+            "subtitle": "បុរាណរៀន។ ប្រអប់ជ្រើស។ និយាយសម្រាប់កុមារនៅក្នុងជម្រើសសាលាអង់គ្លេស។ ខ្មែរ និង អារុង។",
+            "cta": "ចាប់ផ្តើមរៀន",
+            "cta_url": "/subjects"
+          },
+          "ar": {
+            "title": "تعلم. لعب. نم.",
+            "subtitle": "دروس واختبارات ومهام تعليمية مجانية للأطفال باللغة الإنجليزية والخميرية والعربية.",
+            "cta": "ابدأ التعلم",
+            "cta_url": "/subjects"
+          }
+        },
+        "position": 1
+      },
+      {
+        "id": "s2",
+        "type": "subjects",
+        "content": {
+          "en": { "title": "Subjects", "description": "Choose a subject to start learning" },
+          "km": { "title": "មុខវិជ្ជា", "description": "ជ្រើសមុខរបរសិទ្ធចូលរៀន" },
+          "ar": { "title": "المواد", "description": "اختر مادة لبدء التعلم" }
+        },
+        "position": 2
+      },
+      {
+        "id": "s3",
+        "type": "steps",
+        "content": {
+          "en": {
+            "title": "How It Works",
+            "items": [
+              { "title": "Admin creates content", "desc": "Lessons, quizzes and assignments in 3 languages" },
+              { "title": "Teacher assigns work", "desc": "Pick lessons, set due dates, assign to students" },
+              { "title": "Student learns", "desc": "Do lessons, take quizzes, submit work" },
+              { "title": "Parent watches", "desc": "See progress, scores and feedback" }
+            ]
+          },
+          "km": {
+            "title": "វិធីការធ្វើវិញ",
+            "items": [
+              { "title": "អ្នកគ្រប់គ្រងបង្កើតមុខនិយឹយ", "desc": "បុរាណរៀន។ ប្រអប់។ និយាយនៅក្នុង៣ភាសា" },
+              { "title": "គ្រូប្រើការណ៍សម្រាប់សិស្ស", "desc": "ជ្រើសបុរាណរៀន។ កំណត់កាលបរិច្ឆេទ។ ប្ដូរសម្រាប់សិស្ស" },
+              { "title": "សិស្សរៀបរៀប", "desc": "ធ្វើបុរាណរៀន។ ធ្វើប្រអប់។ ប្ដូរការណ៍" },
+              { "title": "មាតាគ្រូមានទូទាត់", "desc": "ឃើញការវិវត្តន៍។ ពិនិត្យ។ និយាយធ្វើការណ៍" }
+            ]
+          },
+          "ar": {
+            "title": "كيف تعمل",
+            "items": [
+              { "title": "المدير ينشئ المحتوى", "desc": "دروس واختبارات ومهام بـ 3 لغات" },
+              { "title": "المدرس يكلف بالعمل", "desc": "اختر دروسًا، حدد تواريخ التسليم، كلف الطلاب" },
+              { "title": "الطالب يتعلم", "desc": "أدرس دروسًا، اختبر، قدّم العمل" },
+              { "title": "الوالد يتابع", "desc": "شاهد التقدم والدرجات والتعليقات" }
+            ]
+          }
+        },
+        "position": 3
+      },
+      {
+        "id": "s4",
+        "type": "cta",
+        "content": {
+          "en": { "title": "Ready to start?", "cta": "Browse Subjects", "cta_url": "/subjects" },
+          "km": { "title": "រសះទុកចាប់ផ្តើម?", "cta": "មើលមុខវិជ្ជា", "cta_url": "/subjects" },
+          "ar": { "title": "مستعد للبدء؟", "cta": "استعرض المواد", "cta_url": "/subjects" }
+        },
+        "position": 4
+      }
+    ]
+  },
+  "about": {
+    "id": "p2",
+    "slug": "about",
+    "title": { "en": "About", "km": "អំពីយើង", "ar": "من نحن" },
+    "status": "published",
+    "sections": [
+      {
+        "id": "s5",
+        "type": "richtext",
+        "content": {
+          "en": "<h2>About Little Learner</h2><p>Little Learner is a free online learning platform for kids. Teachers assign lessons and quizzes. Parents follow their child's progress. Admins control the whole website from a dashboard.</p>",
+          "km": "<h2>អំពីលីតលារ្នើរ</h2><p>លីតលារ្នើរជាគ្រប់គ្រងរៀនទាំងអស់សម្រាប់កុមារ។ គ្រូប្រើការណ៍បុរាណរៀន និង ប្រអប់។ មាតាគ្រូមានទូទាត់ប្ដូរសិស្ស។ អ្នកគ្រប់គ្រងគ្រប់គ្រាន់វេបសាយន៍ពីផ្នែកគ្រប់គ្រង។</p>",
+          "ar": "<h2>عن ليتل ليرنر</h2><p>ليتل ليرنر منصة تعليمية مجانية عبر الإنترنت للأطفال. المعلمون يكلفون بالدروس والاختبارات. الآباء يتابعون تقدم طفلهم. المدير يتحكم في الموقع بأكمله من لوحة التحكم.</p>"
+        },
+        "position": 1
+      }
+    ]
+  },
+  "contact": {
+    "id": "p3",
+    "slug": "contact",
+    "title": { "en": "Contact", "km": "ទំនាក់ទំនង", "ar": "اتصل بنا" },
+    "status": "published",
+    "sections": [
+      {
+        "id": "s6",
+        "type": "richtext",
+        "content": {
+          "en": "<h2>Contact Us</h2><p>Email: hello@littlelearner.example<br>Phone: +855 12 345 678<br>Address: Phnom Penh, Cambodia</p>",
+          "km": "<h2>ទំនាក់ទំនងយើង</h2><p>អ៊ីមែល: hello@littlelearner.example<br>ទូរស័ព្ទ: +855 12 345 678<br>អាសយដ្ឋាន: ភូមិន្ទនៃក្រុងភ្នំពេញ, កម្ពុជា</p>",
+          "ar": "<h2>اتصل بنا</h2><p>البريد الإلكتروني: hello@littlelearner.example<br>الهاتف: +855 12 345 678<br>العنوان: بنوم بنه، كمبوديا</p>"
+        },
+        "position": 1
+      }
+    ]
+  },
+  "privacy-for-children": {
+    "id": "p4",
+    "slug": "privacy-for-children",
+    "title": { "en": "Privacy for Children", "km": "ឯកជនភាពសម្រាប់កុមារ", "ar": "خصوصية الأطفال" },
+    "status": "published",
+    "sections": [
+      {
+        "id": "s7",
+        "type": "richtext",
+        "content": {
+          "en": "<h2>Privacy for Children</h2><p>We collect only a display name, class, language and avatar. No birth date, address, phone, photo or email for students. No ads. No trackers. No AI training on child data.</p>",
+          "km": "<h2>ឯកជនភាពសម្រាប់កុមារ</h2><p>យើងប្រើនឹងឈ្មោះបើក្បាយប៉ាន់។ ថ្នាក់។ ភាសា។ និង អាវាតារ។ មិនមានថ្ងៃខែឆ្នាំកំណើត។ អាសយដ្ឋាន។ ទូរស័ព្ទ។ រូបភាព។ ឬ អ៊ីមែលសម្រាប់សិស្ស។ មិនមានអតិបរមា។ មិនមានក្រុងប្រើ។ មិនមានអត្រាធិបាលអាយុកុមារ។</p>",
+          "ar": "<h2>خصوصية الأطفال</h2><p>نجمع فقط اسمًا عرضيًا، الصف، اللغة والصورة الرمزية. لا تاريخ ميلاد، عنوان، هاتف، صورة أو بريد إلكتروني للطلاب. لا إعلانات. لا تتبع. لا تدريب ذكاء اصطناعي على بيانات الأطفال.</p>"
+        },
+        "position": 1
+      }
+    ]
+  },
+  "data-retention": {
+    "id": "p5",
+    "slug": "data-retention",
+    "title": { "en": "Data Retention", "km": "ការរាំងទិន្នន័យ", "ar": "احتفاظ البيانات" },
+    "status": "published",
+    "sections": [
+      {
+        "id": "s8",
+        "type": "richtext",
+        "content": {
+          "en": "<h2>Data Retention</h2><p>Student activity is deleted after 90 days of inactivity. Deactivated accounts are removed after 365 days. Parents can request export or deletion of their child's data.</p>",
+          "km": "<h2>ការរាំងទិន្នន័យ</h2><p>ការធ្វើរបៀបរបស់សិស្សនឹងត្រូវលុបក្នុងក្រោយ 90 ថ្ងៃរហ័ស។ គណនីដែលបានបិទនឹងត្រូវលុបក្នុងក្រោយ 365 ថ្ងៃ។ មាតាគ្រូអាចស្នើសុំសរុប ឬ លុបទិន្នន័យរបស់កុមាររបស់គេ។</p>",
+          "ar": "<h2>احتفاظ البيانات</h2><p>يُحذف نشاط الطالب بعد 90 يومًا من عدم النشاط. تُحذف الحسابات المعطلة بعد 365 يومًا. يمكن للأولياء طلب تصدير أو حذف بيانات طفلهم.</p>"
+        },
+        "position": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "b1",
+    "title": { "en": "About Little Learner", "km": "អំពីលីតលារ្នើរ", "ar": "عن ليتل ليرنر" },
+    "content": {
+      "en": "A free, ad-free learning platform for kids in English, Khmer and Arabic. No tracking, no ads, no selling data.",
+      "km": "គ្រប់គ្រងរៀនឆ្នាំគ្រប់គ្រាន់សម្រាប់កុមារនៅក្នុងភាសាអង់គ្លេស។ ខ្មែរ និង អារុង។ មិនមានសង្ខេប។ មិនមានអតិបរមា។ មិនលើកទិន្នន័យ។",
+      "ar": "منصة تعليمية مجانية للأطفال باللغة الإنجليزية والخميرية والعربية. لا إعلانات، لا تتبع، لا بيع للبيانات."
+    },
+    "position": 1
+  },
+  {
+    "id": "b2",
+    "title": { "en": "Contact Us", "km": "ទំនាក់ទំនងយើង", "ar": "اتصل بنا" },
+    "content": {
+      "en": "Email: hello@littlelearner.example  Phone: +855 12 345 678  Address: Phnom Penh, Cambodia",
+      "km": "អ៊ីមែល: hello@littlelearner.example  ទូរស័ព្ទ: +855 12 345 678  អាសយដ្ឋាន: ភូមិន្ទនៃក្រុងភ្នំពេញ, កម្ពុជា",
+      "ar": "البريد الإلكتروني: hello@littlelearner.example  الهاتف: +855 12 345 678  العنوان: بنوم بنه، كمبوديا"
+    },
+    "position": 2
+  }
+]

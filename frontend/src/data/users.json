@@ -1,0 +1,57 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "email": "admin@littlelearner.example",
+      "password_hash": "$2b$12$mock.hash.for.admin",
+      "role": "admin",
+      "full_name": "System Admin",
+      "preferred_lang": "en",
+      "is_active": true,
+      "login_method": "password",
+      "avatar": "admin"
+    },
+    {
+      "id": "u2",
+      "email": "teacher@littlelearner.example",
+      "password_hash": "$2b$12$mock.hash.for.teacher",
+      "role": "teacher",
+      "full_name": "Ms. Sreynith",
+      "preferred_lang": "km",
+      "is_active": true,
+      "login_method": "password",
+      "avatar": "teacher"
+    },
+    {
+      "id": "u3",
+      "email": "student1@littlelearner.example",
+      "password_hash": "$2b$12$mock.hash.for.student",
+      "role": "student",
+      "full_name": "Sophal",
+      "preferred_lang": "km",
+      "is_active": true,
+      "login_method": "pin",
+      "login_token_hash": "mock_pin_hash_1234",
+      "avatar": "bear"
+    },
+    {
+      "id": "u4",
+      "email": "parent1@littlelearner.example",
+      "password_hash": "$2b$12$mock.hash.for.parent",
+      "role": "parent",
+      "full_name": "Mr. Somchai",
+      "preferred_lang": "en",
+      "is_active": true,
+      "login_method": "password",
+      "avatar": "parent"
+    }
+  ],
+  "links": {
+    "student_parent": [
+      { "student_id": "u3", "parent_id": "u4" }
+    ],
+    "teacher_student": [
+      { "teacher_id": "u2", "student_id": "u3" }
+    ]
+  }
+}

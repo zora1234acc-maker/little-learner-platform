@@ -1,0 +1,23 @@
+[
+  {
+    "id": "sub1",
+    "title": { "en": "Khmer Language", "km": "ភាសាខ្មែរ", "ar": "اللغة الخميرية" },
+    "description": { "en": "Learn to read and write Khmer", "km": "រៀនអាននិងសរសេរខ្មែរ", "ar": "تعلم قراءة وكتابة اللغة الخميرية" },
+    "position": 1,
+    "is_published": true
+  },
+  {
+    "id": "sub2",
+    "title": { "en": "Mathematics", "km": "គណិតវិជ្ជា", "ar": "الرياضيات" },
+    "description": { "en": "Basic math for early learners", "km": "គណិតមួយរបស់កុមារចាប់ផ្តើម", "ar": "رياضيات أساسية للمتعلمين المبتدئين" },
+    "position": 2,
+    "is_published": true
+  },
+  {
+    "id": "sub3",
+    "title": { "en": "Science", "km": "វិទ្យាសាស្ត្រ", "ar": "العلوم" },
+    "description": { "en": "Explore the world around us", "km": "ស្វែងរកពិភពលោកនៅក្នុងយើង", "ar": "استكشف العالم من حولنا" },
+    "position": 3,
+    "is_published": true
+  }
+]

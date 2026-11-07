@@ -1,0 +1,31 @@
+{
+  "site_name": "Little Learner",
+  "tagline": {
+    "en": "Free learning for every child",
+    "km": "ការរៀនមិនមានចំណងជើងសម្រាប់កុមារទាំងអស់",
+    "ar": "تعلم مجاني لكل طفل"
+  },
+  "logo_url": null,
+  "favicon_url": null,
+  "brand_colors": {
+    "primary": "#3B3F8F",
+    "accent": "#FFC93C",
+    "success": "#2FBF94",
+    "warning": "#FF6FA1",
+    "info": "#5AA9FF",
+    "background": "#F6F8FF"
+  },
+  "contact": {
+    "email": "hello@littlelearner.example",
+    "phone": "+855 12 345 678",
+    "address": "Phnom Penh, Cambodia"
+  },
+  "social": {
+    "facebook": "https://facebook.com/littlelearner",
+    "telegram": "https://t.me/littlelearner"
+  },
+  "retention_days_activity": 90,
+  "retention_days_deactivated": 365,
+  "privacy_page_slug": "privacy-for-children",
+  "retention_page_slug": "data-retention"
+}

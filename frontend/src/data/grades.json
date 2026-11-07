@@ -1,0 +1,19 @@
+[
+  {
+    "id": "g1",
+    "submission_id": "s1",
+    "score": 85,
+    "comment": { "en": "Good work!", "km": "ការធ្វើល្អណាស់!", "ar": "عمل جيد!" },
+    "graded_by": "u2",
+    "graded_at": "2026-11-16T14:30:00Z"
+  },
+  {
+    "id": "g2",
+    "submission_id": null,
+    "score": 100,
+    "comment": { "en": "Perfect score!", "km": "ពិនិត្យប្រាក់ប្រាល់!", "ar": "درجة مثالية!" },
+    "graded_by": "u2",
+    "graded_at": "2026-11-14T09:00:00Z",
+    "quiz_attempt_id": "qa1-u3"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "a1",
+    "item_type": "lesson",
+    "item_id": "l1",
+    "assigned_by": "u2",
+    "due_date": "2026-11-20",
+    "title": { "en": "Learn Khmer Alphabet", "km": "រៀនអក្សរខ្មែរ", "ar": "تعلم الحروف الخميرية" },
+    "instructions": { "en": "Read the lesson and complete the quiz", "km": "អានបុរាណរៀន និង ធ្វើប្រអប់ឱ្យបានបញ្ចប់", "ar": "اقرأ الدرس وأكمل الاختبار" },
+    "targets": [
+      { "assignment_id": "a1", "student_id": "u3", "status": "not_started", "completed_at": null }
+    ]
+  },
+  {
+    "id": "a2",
+    "item_type": "quiz",
+    "item_id": "q1",
+    "assigned_by": "u2",
+    "due_date": "2026-11-25",
+    "title": { "en": "Khmer Consonant Quiz", "km": "ប្រអប់អក្សរដែលមានអាណត្តិទិន", "ar": "اختبار الساكنات الخميرية" },
+    "instructions": { "en": "Answer all questions. Try your best!", "km": "ឆ្លើយសំណួរទាំងអស់។ ក្នុងការរំពឹងរបស់អ្នក!", "ar": "أجب على جميع الأسئلة. حاول جاهدًا!" },
+    "targets": [
+      { "assignment_id": "a2", "student_id": "u3", "status": "not_started", "completed_at": null }
+    ]
+  },
+  {
+    "id": "a3",
+    "item_type": "assignment",
+    "item_id": null,
+    "assigned_by": "u2",
+    "due_date": "2026-12-01",
+    "title": { "en": "Draw a Plant", "km": "គូរស្លឹង", "ar": "ارسم نباتًا" },
+    "instructions": { "en": "Draw a plant with roots, stem and leaves. Upload a photo.", "km": "គូរស្លឹងដោយមានរង្វាន់។ ធ្លាប់។ និងបញ្ចេញ។ ផ្ដល់រូបថត។", "ar": "ارسم نباتًا به جذور وسيقان وأوراق. ارفع صورة." },
+    "targets": [
+      { "assignment_id": "a3", "student_id": "u3", "status": "not_started", "completed_at": null }
+    ]
+  }
+]

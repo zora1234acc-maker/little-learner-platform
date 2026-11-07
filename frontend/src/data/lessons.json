@@ -1,0 +1,47 @@
+[
+  {
+    "id": "l1",
+    "course_id": "c1",
+    "title": { "en": "First Consonant: ក", "km": "អក្សរដើម៖ ក", "ar": "أول حرف ساكن: كه" },
+    "type": "reading",
+    "body": {
+      "en": "<p>This is the first Khmer consonant <strong>ក</strong> (ka). It makes the 'k' sound like in 'kite'.</p><p>Practice writing it: start at the top, curve down and around.</p>",
+      "km": "<p>នេះជាអក្សរដើមដែលមានអាណត្តិទិន <strong>ក</strong> (ka). វាប្អូនសម្រាប់ការអាន 'ក' ជាមូល 'កាយ៉ីតេ'។</p><p>អនុវត្តការសរសេរ៖ ចាប់ផ្ដើមនៅលើលើ។ រលងលើកនិងរង់។</p>",
+      "ar": "<p>هذا أول حرف ساكن خميري <strong>كه</strong> (ka). يُنطق como 'ك' كما في 'kit'.</p><p>مارس كتابته: ابدأ من الأعلى، انحني إلى أسفل وحولًا.</p>"
+    },
+    "video_url": null,
+    "audio_url": { "en": null, "km": null, "ar": null },
+    "position": 1,
+    "is_published": true
+  },
+  {
+    "id": "l2",
+    "course_id": "c2",
+    "title": { "en": "Counting 1 to 5", "km": "គណនា 1 ដល់ 5", "ar": "العد من 1 إلى 5" },
+    "type": "video",
+    "body": {
+      "en": "<p>Let's count together! 1, 2, 3, 4, 5. Use your fingers to count.</p>",
+      "km": "<p>អ្នកនឹងគណនាជានឹងគ្នា! 1, 2, 3, 4, 5. ប្រើចលនារបស់អ្នកដើម្បីគណនា។</p>",
+      "ar": "<p>لنعد معًا! 1، 2، 3، 4، 5. استخدم أصابعك للعد.</p>"
+    },
+    "video_url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "audio_url": null,
+    "position": 1,
+    "is_published": true
+  },
+  {
+    "id": "l3",
+    "course_id": "c3",
+    "title": { "en": "Parts of a Plant", "km": "បច្ចុប្បន្នភាពរបស់ស្លឹង", "ar": "أجزاء النبات" },
+    "type": "reading",
+    "body": {
+      "en": "<p>A plant has roots, a stem, leaves and flowers.</p>",
+      "km": "<p>ស្លឹងមានរង្វាន់។ ធ្លាប់។ បញ្ចេញ។ និងផ្កា។</p>",
+      "ar": "<p>للنبات جذور، وسيقان، وأوراق وأزهار.</p>"
+    },
+    "video_url": null,
+    "audio_url": null,
+    "position": 1,
+    "is_published": true
+  }
+]
