@@ -86,6 +86,16 @@ export function AdminUsers() {
 
   const byRole = (role) => users.filter((user) => user.role === role);
 
+  const hasFilters =
+    search.trim() !== "" || roleFilter !== "all" || classFilter !== "all";
+
+  // FR-018: clear every search/filter criterion in one action.
+  const clearFilters = () => {
+    setSearch("");
+    setRoleFilter("all");
+    setClassFilter("all");
+  };
+
   const openCreate = () => {
     setForm(emptyForm);
     setError("");
@@ -208,7 +218,7 @@ export function AdminUsers() {
         <>
           <div className="flex flex-col gap-3 sm:flex-row">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <input
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
@@ -247,6 +257,15 @@ export function AdminUsers() {
                   </option>
                 ))}
               </select>
+            ) : null}
+            {hasFilters ? (
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="btn-ghost min-h-[44px] px-4"
+              >
+                {t("admin.users.clear_filters")}
+              </button>
             ) : null}
           </div>
 
@@ -313,8 +332,8 @@ export function AdminUsers() {
       ) : (
         <div className="grid gap-6 lg:grid-cols-2">
           <LinkCard
-            title="Parents & children"
-            description="A parent sees progress only for linked children."
+            title={t("admin.links.parents_children")}
+            description={t("admin.links.see_progress")}
             people={byRole("parent")}
             secondaryPeople={byRole("student")}
             primaryKey="parent_id"
@@ -326,8 +345,8 @@ export function AdminUsers() {
           />
 
           <LinkCard
-            title="Teachers & students"
-            description="A teacher can only read data for linked students."
+            title={t("admin.links.teachers_students")}
+            description={t("admin.links.teacher_data")}
             people={byRole("teacher")}
             secondaryPeople={byRole("student")}
             primaryKey="teacher_id"
@@ -361,9 +380,10 @@ export function AdminUsers() {
                 onChange={(event) => setForm({ ...form, full_name: event.target.value })}
                 className="input-field"
                 aria-invalid={Boolean(errors.full_name)}
+                aria-describedby={errors.full_name ? "error-full-name" : undefined}
                 required
               />
-              <FieldError message={errors.full_name} />
+              <FieldError id="error-full-name" message={errors.full_name} />
             </div>
             <div>
               <label className="field-label" htmlFor="student-email">{t("admin.users.email")}</label>
@@ -374,9 +394,10 @@ export function AdminUsers() {
                 onChange={(event) => setForm({ ...form, email: event.target.value })}
                 className="input-field"
                 aria-invalid={Boolean(errors.email)}
+                aria-describedby={errors.email ? "error-email" : undefined}
                 required
               />
-              <FieldError message={errors.email} />
+              <FieldError id="error-email" message={errors.email} />
             </div>
             <div>
               <label className="field-label">{t("admin.users.role")}</label>
@@ -415,9 +436,10 @@ export function AdminUsers() {
                     className="input-field"
                     placeholder={t("admin.users.year_level_placeholder")}
                     aria-invalid={Boolean(errors.year_level)}
+                    aria-describedby={errors.year_level ? "error-year-level" : undefined}
                     required
                   />
-                  <FieldError message={errors.year_level} />
+                  <FieldError id="error-year-level" message={errors.year_level} />
                 </div>
                 <div>
                   <label className="field-label" htmlFor="student-class">{t("admin.users.class_name")}</label>
@@ -428,9 +450,10 @@ export function AdminUsers() {
                     className="input-field"
                     placeholder={t("admin.users.class_placeholder")}
                     aria-invalid={Boolean(errors.class_name)}
+                    aria-describedby={errors.class_name ? "error-class-name" : undefined}
                     required
                   />
-                  <FieldError message={errors.class_name} />
+                  <FieldError id="error-class-name" message={errors.class_name} />
                 </div>
                 <div>
                   <label className="field-label" htmlFor="student-pin">{t("admin.users.login_pin")}</label>
@@ -470,7 +493,7 @@ export function AdminUsers() {
                     }`}
                   >
                     <Avatar src={url} name={form.avatar || form.role} size="xs" />
-                    {url ? url.split("/").pop() : "Emoji"}
+                    {url ? url.split("/").pop() : t("admin.users.emoji")}
                   </button>
                 ))}
               </div>
@@ -512,18 +535,19 @@ const fieldErrorKeys = {
   "Class is required.": "admin.users.errors.class_name",
 };
 
-function FieldError({ message }) {
+function FieldError({ id, message }) {
   const { t } = useTranslation();
   if (!message) return null;
   const key = fieldErrorKeys[message];
   return (
-    <p role="alert" className="mt-1 text-xs font-medium text-bubblegum">
+    <p id={id} role="alert" className="mt-1 text-xs font-medium text-bubblegum">
       {key ? t(key) : message}
     </p>
   );
 }
 
 function LinkCard({ title, description, people, secondaryPeople, primaryKey, secondaryKey, existing, onAdd, onRemove, nameOf }) {
+  const { t } = useTranslation();
   const [primary, setPrimary] = useState(people[0]?.id || "");
   const [secondary, setSecondary] = useState(secondaryPeople[0]?.id || "");
 
@@ -554,12 +578,12 @@ function LinkCard({ title, description, people, secondaryPeople, primaryKey, sec
         onClick={() => onAdd({ [primaryKey]: primary, [secondaryKey]: secondary })}
         className="btn-secondary mt-3 w-full min-h-[44px] px-4 py-2.5 text-sm"
       >
-        <Plus className="h-4 w-4" /> Link
+        <Plus className="h-4 w-4" /> {t("admin.links.link")}
       </button>
 
       <div className="mt-4 space-y-2">
         {existing.length === 0 ? (
-          <p className="text-sm text-muted-foreground">No links yet.</p>
+          <p className="text-sm text-muted-foreground">{t("admin.links.no_links")}</p>
         ) : (
           existing.map((link) => (
             <div key={`${link[primaryKey]}-${link[secondaryKey]}`} className="flex items-center justify-between rounded-lg border border-border bg-background px-3 py-2 text-sm">
@@ -570,7 +594,7 @@ function LinkCard({ title, description, people, secondaryPeople, primaryKey, sec
                 type="button"
                 onClick={() => onRemove(link)}
                 className="rounded p-1.5 text-muted-foreground hover:bg-bubblegum/10 hover:text-bubblegum"
-                aria-label="Remove link"
+                aria-label={t("admin.links.remove")}
               >
                 <Trash2 className="h-3.5 w-3.5" />
               </button>

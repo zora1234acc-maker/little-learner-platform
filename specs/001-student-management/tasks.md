@@ -216,4 +216,19 @@ Web application: `backend/app/`, `backend/migrations/versions/`, `frontend/src/`
 - T036: the deleted-docs concern from planning no longer applies — `README.md`, `AGENTS.md`, and `docs/` are present in the working tree with modifications, not deletions (`git status` shows no `D` entries).
 - T035 remains open: it is the browser walkthrough in `quickstart.md` section 2. Everything it checks is also covered programmatically by `students.test.js`, but the visual/mobile pass has not been performed by a human in a running app.
 
+---
+
+## Phase 9: Convergence
+
+Findings from the final cross-artifact review, completed in the same pass.
+
+- [x] T038 Add a single-action "Clear filters" control that resets search, role and class filters and appears whenever any filter is active (FR-018, US2/AC6)
+- [x] T039 Route the links-tab titles, helper text, link action, empty state and remove label through the translation catalogues instead of hardcoded English (FR-026, SC-006)
+- [x] T040 Associate each validation message with its input via `aria-describedby`, alongside the existing `aria-invalid` and `role="alert"` (FR-028, US5/AC3)
+- [x] T041 Position the roster search icon with the logical `start-3` inset so it mirrors correctly in Arabic (FR-027, US5/AC2)
+
+**A2 (contract wording) resolved**: `contracts/rest-api.md` now states that PIN provisioning is authoritative in the frontend runtime and that the Flask mirror does not persist `login_pin`, matching `data-model.md` and the `users` schema.
+
+**Post-convergence verification**: `npx vitest run` → 7 files / 99 tests passed; `npm run build` → passed; translation keys `clear_filters`, `emoji` and all `admin.links.*` present in en/km/ar.
+
 

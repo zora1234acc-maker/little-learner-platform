@@ -26,7 +26,7 @@ Creates an account. **Behaviour extended** for this feature.
   "year_level": "Grade 2", "class_name": "2A",
   "preferred_lang": "km", "login_pin": "5678" }
 ```
-`login_pin` is optional; when absent the server generates one (FR-010, Q6).
+`login_pin` is optional. **Credential provisioning is authoritative in the frontend runtime** (`mock.js`): a blank or absent PIN is generated as a 4-digit PIN and stored on the mock student record, which is the credential the child signs in with (FR-010, Q6). The Flask mirror accepts `login_pin` but does **not** persist it: the `users` table has no credential column (see `data-model.md`), and backend child sign-in uses the existing `login_token_hash` mechanism. Backend parity for PIN generation is deferred follow-up work and is not part of this feature's schema change.
 
 **201** — the created user as `User.to_dict()`.
 
@@ -83,5 +83,7 @@ One additive Alembic revision on top of `b8997d4343f0` adds, on `users`:
 |--------|------|----------|--------|
 | `year_level` | `String(50)` | yes (additive on an existing table) | Q4 — year level distinct from graded marks |
 | `class_name` | `String(50)` | yes (additive on an existing table) | Q2 — class stored on the student |
+
+`login_pin` is deliberately **not** added to the schema: it remains a frontend-runtime credential in `mock.js` (see the POST section), so the backend mirror does not persist it and no credential column is introduced by this feature.
 
 Both are nullable at the database level so the migration applies to a populated `users` table without a backfill; the API enforces non-emptiness for student creation and edits (FR-005). `downgrade()` drops both columns.
