@@ -18,12 +18,16 @@
     "library": "Library",
     "assign": "Assignments",
     "classProgress": "Class Progress",
-    "logout": "Logout"
+    "logout": "Logout",
+    "menu": "Main menu",
+    "language": "Language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "home": {
     "eyebrow": "Free learning for every child",
     "hero_title": "Learn, Play, Grow",
-    "hero_subtitle": "Lessons, quizzes and assignments for kids in English, Khmer and Arabic — built for phones, not just computers.",
+    "hero_subtitle": "Lessons, quizzes and assignments for kids in English and Khmer — built for phones, not just computers.",
     "cta_start": "Start Learning",
     "stats": {
       "subjects": "Subjects",
@@ -31,26 +35,65 @@
       "quizzes": "Quizzes",
       "languages": "Languages",
       "free": "Free",
-      "ads": "No Ads"
+      "ads": "No ads"
     },
     "cards": {
       "lessons": { "title": "Lessons", "desc": "Video and reading lessons for early learners." },
       "quizzes": { "title": "Quizzes", "desc": "Auto-scored quizzes with instant feedback." },
-      "languages": { "title": "3 Languages", "desc": "English, Khmer and Arabic with full RTL support." }
+      "languages": { "title": "2 languages", "desc": "English and Khmer, designed for growing learners." }
     },
     "featured": "Featured",
-    "featured_subjects": "Popular Subjects",
-    "view_all": "View All",
+    "featured_subjects": "Popular subjects",
+    "featured_desc": "Pick a subject and open the book.",
+    "open_subject": "Open subject",
+    "view_all": "View all",
     "subj_desc": {
       "khmer": "Learn to read and write Khmer",
       "math": "Basic math for early learners",
       "science": "Explore the world around us"
     },
     "recent": "Recent",
-    "recent_lessons": "Recent Lessons",
+    "recent_lessons": "Recent lessons",
+    "empty_subjects": "Subjects are being prepared.",
+    "empty_lessons": "New lessons are on the way.",
     "video": "Video",
     "reading": "Reading",
-    "start": "Start Lesson",
+    "start": "Start lesson",
+    "signin": {
+      "title": "How children sign in",
+      "tabs": {
+        "picture": "Picture",
+        "pin": "PIN",
+        "qr": "QR code"
+      },
+      "hints": {
+        "picture": "Your child taps their own picture. No reading, no typing.",
+        "pin": "Each child gets a short code from their teacher.",
+        "qr": "Printed cards scan from the camera. Nothing to type."
+      },
+      "link": "See how login works"
+    },
+    "browse": "Browse subjects",
+    "continue": "Open my dashboard",
+    "quiz_demo": {
+      "label": "Try it",
+      "title": "Answer one question",
+      "desc": "This is what a quiz looks like. Pick an answer and get feedback right away.",
+      "note": "Feedback is instant, and a wrong answer just says try again.",
+      "progress": "Question {{current}} of {{total}}",
+      "right": "That's right!",
+      "again": "Try again",
+      "next": "Next question",
+      "restart": "Start over"
+    },
+    "privacy": {
+      "title": "What we never do",
+      "point1": "No ads, ever.",
+      "point2": "No trackers or analytics.",
+      "point3": "No AI training on child data.",
+      "point4": "Students keep only a display name, class and avatar.",
+      "link": "How we keep children safe"
+    },
     "features": {
       "title": "Why Choose Little Learner",
       "subtitle": "Built for kids, teachers, and parents",
@@ -63,8 +106,8 @@
         "desc": "No ads, no trackers, no AI training on child data"
       },
       "multilingual": {
-        "title": "3 Languages",
-        "desc": "English, Khmer and Arabic with full RTL support"
+        "title": "2 Languages",
+        "desc": "English and Khmer, designed for growing learners"
       },
       "admin_cms": {
         "title": "Admin Controls Everything",
@@ -114,33 +157,33 @@
       }
     },
     "how_steps": {
-      "1": { "title": "Admin Creates Content", "desc": "Lessons, quizzes and assignments in three languages." },
-      "2": { "title": "Teacher Assigns Work", "desc": "Pick lessons, set due dates, assign to students." },
-      "3": { "title": "Student Learns", "desc": "Do lessons, take quizzes, submit work." },
-      "4": { "title": "Parent Watches", "desc": "See progress, scores and feedback." }
+      "1": { "title": "Admin creates content", "desc": "Lessons, quizzes and assignments in two languages." },
+      "2": { "title": "Teacher assigns work", "desc": "Pick lessons, set due dates, assign to students." },
+      "3": { "title": "Student learns", "desc": "Do lessons, take quizzes, submit work." },
+      "4": { "title": "Parent watches", "desc": "See progress, scores and feedback." }
     },
     "badges": {
       "title": "Trusted & Safe",
       "subtitle": "Child privacy and safety come first"
     },
     "faqs": {
-      "title": "Frequently Asked Questions",
+      "title": "Questions parents ask",
       "subtitle": "Everything you need to know",
       "q1": "Is Little Learner free?",
       "a1": "Yes! Little Learner is 100% free. No ads, no subscriptions, no hidden fees.",
       "q2": "What languages do you support?",
-      "a2": "We support English, Khmer, and Arabic with full RTL (right-to-left) layout for Arabic.",
+      "a2": "We support English and Khmer with a clear, friendly layout for every learner.",
       "q3": "Is my child's data safe?",
       "a3": "Absolutely. We never show ads, never use trackers, and never use child data for AI training.",
       "q4": "Do kids need to type to log in?",
       "a4": "No! Students can log in with QR code, PIN, or picture — perfect for young children who can't type yet."
     },
     "cta_title": "Ready to start learning?",
-    "cta_desc": "Join thousands of kids learning in English, Khmer and Arabic.",
+    "cta_desc": "Free to use, with no ads and no trackers. Start with any subject.",
     "how_works": "How it works",
     "how_works_title": "Four steps to learn",
     "steps": {
-      "1": { "title": "Admin creates content", "desc": "Lessons, quizzes and assignments in three languages." },
+      "1": { "title": "Admin creates content", "desc": "Lessons, quizzes and assignments in two languages." },
       "2": { "title": "Teacher assigns work", "desc": "Pick lessons, set due dates, assign to students." },
       "3": { "title": "Student learns", "desc": "Do lessons, take quizzes, submit work." },
       "4": { "title": "Parent watches", "desc": "See progress, scores and feedback." }
@@ -149,8 +192,8 @@
   "common": {
     "language": "Language",
     "english": "English",
-    "khmer": "ភាសាខ្មែរ",
-    "arabic": "العربية",
+    "khmer": "Khmer",
+    "arabic": "Arabic",
     "rtl_toggle": "Right-to-left layout",
     "back": "Back",
     "submit": "Submit",
@@ -158,7 +201,13 @@
     "search": "Search",
     "loading": "Loading...",
     "error": "Something went wrong",
-    "try_again": "Try again"
+    "try_again": "Try again",
+    "no_scores_yet": "No scores yet",
+    "average": "Average",
+    "earned": "earned",
+    "no_activity": "No activity yet.",
+    "nothing_here": "Nothing here yet.",
+    "overdue": "Overdue"
   },
   "auth": {
     "login_title": "Login",
@@ -166,5 +215,255 @@
     "pin_login": "Login with PIN",
     "picture_login": "Login with picture",
     "no_typing": "No typing required for kids"
+  },
+  "student": {
+    "todo": {
+      "title": "My to-do",
+      "description": "Lessons, quizzes and assignments your teacher sent you.",
+      "total": "Total",
+      "todo": "To do",
+      "done": "Done",
+      "all": "All",
+      "overdue": "Overdue",
+      "review": "Review",
+      "start": "Start",
+      "everything_done": "Everything is done. Nice work!",
+      "no_assignments": "No assignments yet. Your teacher will send work soon.",
+      "loading": "Loading your work..."
+    },
+    "progress": {
+      "title": "My progress",
+      "description": "See what you have completed and how you scored.",
+      "assignments": "Assignments",
+      "completed": "Completed",
+      "average_score": "Average score",
+      "overdue": "Overdue",
+      "keep_moving": "Keep moving forward",
+      "journey_progress": "Journey progress",
+      "achievements": "Achievements",
+      "badges": "Badges",
+      "earned_label": "earned",
+      "by_subject": "By subject",
+      "subject": "Subject",
+      "progress_col": "Progress",
+      "score_col": "Score",
+      "recent_work": "Recent work",
+      "no_activity": "No activity yet.",
+      "nothing_here": "Nothing here yet."
+    },
+    "submit": {
+      "title": "Submit your work",
+      "back": "Back",
+      "submitted": "Work submitted",
+      "work_submitted": "Work submitted",
+      "teacher_review": "Your teacher will review it soon. You can follow the grade in your progress page.",
+      "not_found": "This assignment was not found for your account.",
+      "how_submit": "How do you want to submit?",
+      "write_answer": "Write an answer",
+      "upload_file": "Upload a file",
+      "your_answer": "Your answer",
+      "type_answer": "Type your answer here...",
+      "write_own_words": "Write in your own words.",
+      "click_choose": "Click to choose a file",
+      "remove_file": "Remove file",
+      "file_types": "Photo, PDF or drawing",
+      "cancel": "Cancel",
+      "quiz_task": "This task is a quiz.",
+      "open_quiz": "Open the quiz to answer the questions.",
+      "open_lesson": "Open the lesson first",
+      "play": "Play",
+      "lesson_first": "Open the lesson first",
+      "submit_error": "Could not submit your work. Please try again.",
+      "submitting": "Submitting..."
+    },
+    "quiz_result": {
+      "title": "Quiz result",
+      "not_taken": "You have not taken this quiz yet.",
+      "take_quiz": "Take the quiz",
+      "passed": "Passed",
+      "failed": "Not passed",
+      "excellent": "Excellent work! You passed this quiz.",
+      "keep_trying": "Keep trying — you can retake this quiz.",
+      "score": "Score",
+      "taken": "Taken",
+      "correct": "Correct",
+      "incorrect": "Incorrect",
+      "your_answer": "Your answer:",
+      "correct_answer": "Correct answer:",
+      "try_again": "Try again",
+      "back_to_todo": "Back to to-do",
+      "view_full_result": "View full result",
+      "subjects": "Subjects"
+    }
+  },
+  "teacher": {
+    "library": {
+      "title": "Browse content",
+      "description": "Published subjects, courses, lessons and quizzes. Pick a course to assign work to your students.",
+      "search": "Search courses or subjects...",
+      "no_courses": "No courses match your search.",
+      "lessons": "lessons",
+      "quizzes": "quizzes",
+      "assign": "Assign to students",
+      "create": "Create assignment"
+    },
+    "assign": {
+      "title": "Create assignment",
+      "description": "Pick a lesson or quiz and assign it to your linked students.",
+      "item_type": "Item type",
+      "select": "Select {{itemType}}",
+      "assignment_title": "Assignment title",
+      "instructions": "Instructions",
+      "due_date": "Due date",
+      "assign_to_students": "Assign to students",
+      "select_all": "Select all",
+      "clear_all": "Clear all",
+      "no_students_linked": "No students are linked to you yet. Ask an admin to link students.",
+      "choose_item": "Choose a lesson or quiz first.",
+      "select_student": "Select at least one student.",
+      "create_error": "Could not create the assignment. Please try again.",
+      "sent_to": "Sent to {{count}} student(s).",
+      "view_class_progress": "View class progress",
+      "create_another": "Create another",
+      "back": "Back"
+    },
+    "class_progress": {
+      "title": "Track your students",
+      "description": "Completion, average scores and overdue work for every linked student.",
+      "students": "Students",
+      "completed": "Completed",
+      "average_score": "Average score",
+      "overdue": "Overdue",
+      "student_col": "Student",
+      "average_col": "Average",
+      "status_col": "Status",
+      "loading": "Loading class progress...",
+      "no_students": "No students are linked to you yet.",
+      "on_track": "On track",
+      "needs_attention": "Needs attention"
+    },
+    "grading": {
+      "title": "Grade submissions",
+      "description": "Review and grade student work.",
+      "pending": "Pending",
+      "graded": "Graded",
+      "no_pending": "No pending submissions.",
+      "no_graded": "No graded work yet.",
+      "score_label": "Score (0-100)",
+      "comment_label": "Comment",
+      "save_grade": "Save grade",
+      "grade_submission": "Grade submission",
+      "cancel": "Cancel",
+      "saving": "Saving..."
+    }
+  },
+  "parent": {
+    "children": {
+      "title": "My children",
+      "description": "View progress for your linked children. You only see children linked to your account.",
+      "no_children_linked": "No children are linked to your account yet.",
+      "ask_admin_link": "Ask an administrator to link a student to you.",
+      "done": "done",
+      "overdue": "overdue",
+      "average": "average",
+      "no_scores": "No scores yet",
+      "view_details": "View details",
+      "loading": "Loading..."
+    },
+    "child_progress": {
+      "title": "Child progress",
+      "back": "Back",
+      "child_not_found": "Child not found.",
+      "assigned": "Assigned",
+      "week_of_progress": "A week of progress",
+      "activities_done": "Activities done",
+      "average_score": "Average score",
+      "need_attention": "Need attention",
+      "badges_earned": "Badges earned",
+      "recent_activity": "Recent activity",
+      "no_activity": "No activity yet.",
+      "weekly_report": "Weekly report",
+      "parent_summary": "Parent summary",
+      "data_request": "Need a copy of your child's data or want it deleted? Contact the school administrator from the",
+      "contact_page": "contact page",
+      "no_ads": "No ads, no trackers and no AI training on children's data."
+    }
+  },
+  "admin": {
+    "users": {
+      "title": "Manage accounts",
+      "description": "Create and manage accounts for all roles. Only admins create accounts. Parents and teachers are linked to their children or students here.",
+      "add_user": "Add user",
+      "accounts": "Accounts",
+      "links": "Links",
+      "search": "Search by name or email...",
+      "all_roles": "All roles",
+      "admin_role": "Admin",
+      "teacher_role": "Teacher",
+      "student_role": "Student",
+      "parent_role": "Parent",
+      "no_accounts": "No accounts match your filters.",
+      "edit": "Edit",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "delete": "Delete user",
+      "confirm_delete": "Delete {{name}}? This also removes their links.",
+      "confirm_remove_permanent": "Remove {{name}} permanently? This deletes the student and every link, assignment, progress record and grade attached to them. This cannot be undone and none of it can be recovered. To keep their history instead, deactivate the account.",
+      "year_level": "Year level",
+      "year_level_placeholder": "Grade 1",
+      "class_placeholder": "1A",
+      "pin_hint": "Leave blank to generate a PIN automatically.",
+      "all_classes": "All classes",
+      "loading": "Loading users...",
+      "saving": "Saving...",
+      "description_short": "Create and manage accounts for all roles.",
+      "create_title": "Create account",
+      "edit_title": "Edit account",
+      "modal_description": "Students sign in with a PIN or picture — no typing required.",
+      "save": "Save account",
+      "cancel": "Cancel",
+      "full_name": "Full name",
+      "email": "Email",
+      "role": "Role",
+      "preferred_lang": "Preferred language",
+      "grade": "Grade",
+      "class_name": "Class",
+      "login_pin": "Login PIN",
+      "phone": "Phone (optional)",
+      "avatar": "Avatar image",
+      "is_active": "Account is active",
+      "active": "Active",
+      "inactive": "Inactive",
+      "pin": "PIN {{pin}}",
+      "errors": {
+        "full_name": "Please enter the student's name.",
+        "email_required": "Please enter a sign-in identity.",
+        "email_invalid": "Please enter a valid email address.",
+        "year_level": "Please enter a year level.",
+        "class_name": "Please enter a class."
+      }
+    },
+    "links": {
+      "parents_children": "Parents & children",
+      "teachers_students": "Teachers & students",
+      "link": "Link",
+      "no_links": "No links yet.",
+      "remove": "Remove link",
+      "see_progress": "A parent sees progress only for linked children.",
+      "teacher_data": "A teacher can only read data for linked students."
+    },
+    "cms": {
+      "title": "CMS",
+      "settings": "Site settings",
+      "menus": "Menus",
+      "footer": "Footer blocks",
+      "pages": "Pages",
+      "media": "Media",
+      "how_built": "How the public site is built",
+      "no_footer_blocks": "No footer blocks yet.",
+      "title_label": "Title",
+      "content_label": "Content",
+      "no_pages": "No pages."
+    }
   }
 }

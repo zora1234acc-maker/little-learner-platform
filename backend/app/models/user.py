@@ -20,6 +20,10 @@ class User(db.Model):
     )
     login_token_hash = db.Column(db.String(255), nullable=True)
     avatar = db.Column(db.String(50), nullable=True)
+    # Student roster attributes. Additive and nullable so every pre-existing
+    # record stays valid and no destructive migration is needed (FR-004, FR-031).
+    year_level = db.Column(db.String(50), nullable=True)
+    class_name = db.Column(db.String(50), nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(
         db.DateTime, server_default=db.func.now(), onupdate=db.func.now()
@@ -43,4 +47,6 @@ class User(db.Model):
             "is_active": self.is_active,
             "login_method": self.login_method,
             "avatar": self.avatar,
+            "year_level": self.year_level,
+            "class_name": self.class_name,
         }

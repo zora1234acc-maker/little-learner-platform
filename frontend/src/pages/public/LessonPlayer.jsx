@@ -1,64 +1,93 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, CheckCircle2 } from "lucide-react";
-import { SectionDivider } from "@/components/SectionDivider";
+import { ArrowLeft, CheckCircle2, HelpCircle, Play } from "lucide-react";
+import { api } from "@/api/client";
+import { useSite } from "@/context/SiteContext";
 
 export function LessonPlayer() {
   const { t } = useTranslation();
+  const { lang } = useSite();
   const { lessonId } = useParams();
   const navigate = useNavigate();
   const [lesson, setLesson] = useState(null);
+  const [quiz, setQuiz] = useState(null);
   const [completed, setCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
-  const lang = localStorage.getItem("lang") || "en";
 
   useEffect(() => {
-    const allLessons = {
-      l1: { id: "l1", title: { en: "First Consonant: ក", km: "អក្សរដើម៖ ក", ar: "أول حرف ساكن: كه" }, type: "reading", body: { en: "<p>This is the first Khmer consonant <strong>ក</strong> (ka). It makes the 'k' sound like in 'kite'.</p><p>Practice writing it: start at the top, curve down and around.</p>", km: "<p>នេះជាអក្សរដើមដែលមានអាណត្តិទិន <strong>ក</strong> (ka). វាប្អូនសម្រាប់ការអាន 'ក' ជាមូល 'កាយ៉ីតេ'។</p>", ar: "<p>هذا أول حرف ساكن خميري <strong>كه</strong> (ka). يُنطق como 'ك' كما في 'kit'.</p>" } },
-      l2: { id: "l2", title: { en: "Counting 1 to 5", km: "គណនា 1 ដល់ 5", ar: "العد من 1 إلى 5" }, type: "video", body: { en: "<p>Let's count together! 1, 2, 3, 4, 5.</p>", km: "<p>អ្នកនឹងគណនាជានឹងគ្នា! 1, 2, 3, 4, 5.</p>", ar: "<p>لنعد معًا! 1، 2، 3، 4، 5.</p>" }, video_url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-      l3: { id: "l3", title: { en: "Parts of a Plant", km: "បច្ចុប្បន្នភាពរបស់ស្លឹង", ar: "أجزاء النبات" }, type: "reading", body: { en: "<p>A plant has roots, a stem, leaves and flowers.</p>", km: "<p>ស្លឹងមានរង្វាន់។ ធ្លាប់។ បញ្ចេញ។ និងផ្កា។</p>", ar: "<p>للنبات جذور، وسيقان، وأوراق وأزهار.</p>" } }
+    let live = true;
+    Promise.all([api.content.lessons.get(lessonId), api.content.quizzes.list()])
+      .then(([lessonRes, quizRes]) => {
+        if (!live) return;
+        setLesson(lessonRes.data);
+        setQuiz(quizRes.data.find((item) => item.lesson_id === lessonId) || null);
+      })
+      .catch(() => live && setLesson(null))
+      .finally(() => live && setLoading(false));
+    return () => {
+      live = false;
     };
-    setLesson(allLessons[lessonId]);
-    setLoading(false);
   }, [lessonId]);
 
   const markComplete = async () => {
     setCompleted(true);
-    await new Promise((r) => setTimeout(r, 500));
+    await api.content.lessons.complete(lessonId);
   };
 
-  if (loading || !lesson) {
-    return <div className="text-center py-24 text-muted-foreground animate-pulse">{t("common.loading")}</div>;
+  if (loading) {
+    return <div className="animate-pulse py-24 text-center text-muted-foreground">{t("common.loading")}</div>;
+  }
+
+  if (!lesson) {
+    return (
+      <div className="py-24 text-center">
+        <p className="text-muted-foreground">Lesson not found.</p>
+        <Link to="/subjects" className="btn-secondary mt-4">{t("nav.subjects")}</Link>
+      </div>
+    );
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-10">
-      <nav className="flex items-center gap-2">
-        <button onClick={() => navigate(-1)} className="flex items-center gap-1 p-2 rounded-[var(--radius-md)] border border-border hover:bg-accent">
-          <ArrowLeft className="w-4 h-4" /> {t("common.back")}
-        </button>
-      </nav>
+    <div className="mx-auto max-w-2xl space-y-6">
+      <button onClick={() => navigate(-1)} className="inline-flex items-center gap-1 rounded-lg border border-border p-2 text-sm font-bold text-muted-foreground hover:bg-accent">
+        <ArrowLeft className="flip-rtl h-4 w-4" /> {t("common.back")}
+      </button>
 
-      <div className="rounded-[var(--radius-xl)] border border-border bg-card p-8">
-        <h1 className="text-3xl font-black text-blueberry mb-5">{lesson.title[lang] || lesson.title.en}</h1>
+      <article className="rounded-[var(--radius-xl)] border border-border bg-white p-6 sm:p-8 shadow-sm">
+        <p className="text-xs font-bold uppercase tracking-wider text-blueberry/80">
+          {lesson.type === "video" ? t("home.video") : t("home.reading")} lesson
+        </p>
+        <h1 className="mt-2 text-3xl font-black text-blueberry">{lesson.title?.[lang] || lesson.title?.en}</h1>
+
         {lesson.type === "video" && lesson.video_url ? (
-          <div className="aspect-video w-full rounded-[var(--radius-lg)] bg-muted overflow-hidden mb-6">
-            <iframe src={lesson.video_url} title="Lesson video" allowFullScreen className="w-full h-full" />
+          <div className="mt-5 aspect-video w-full overflow-hidden rounded-[var(--radius-lg)] bg-blueberry/10">
+            <iframe src={lesson.video_url} title="Lesson video" allowFullScreen className="h-full w-full" />
           </div>
         ) : null}
-        <div className="prose prose-sm max-w-none text-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: lesson.body[lang] || lesson.body.en }} />
-        <div className="mt-10 pt-8 border-t border-border flex items-center justify-between">
-          <span className="text-sm text-muted-foreground">{lesson.type === "video" ? "Video lesson" : "Reading lesson"}</span>
-          <button
-            onClick={markComplete}
-            disabled={completed}
-            className={`btn-primary ${completed ? "opacity-50 cursor-not-allowed" : ""}`}
-          >
-            {completed ? <CheckCircle2 className="w-4 h-4 mr-2" /> : ""} {completed ? "Completed!" : "Mark Complete"}
-          </button>
+
+        <div
+          className="prose prose-sm mt-6 max-w-none leading-relaxed text-foreground/90"
+          dangerouslySetInnerHTML={{ __html: lesson.body?.[lang] || lesson.body?.en || "" }}
+        />
+
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6">
+          <span className="text-sm text-muted-foreground">
+            {lesson.type === "video" ? t("home.video") : t("home.reading")} · {t("home.start")}
+          </span>
+          <div className="flex flex-wrap gap-2">
+            {quiz ? (
+              <Link to={`/quiz/${quiz.id}`} className="btn-secondary min-h-[44px] px-5 py-2.5 text-sm">
+                <HelpCircle className="h-4 w-4" /> Take quiz
+              </Link>
+            ) : null}
+            <button onClick={markComplete} disabled={completed} className={`btn-primary min-h-[44px] px-5 py-2.5 text-sm ${completed ? "opacity-60" : ""}`}>
+              {completed ? <CheckCircle2 className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+              {completed ? "Completed!" : "Mark complete"}
+            </button>
+          </div>
         </div>
-      </div>
+      </article>
     </div>
   );
 }

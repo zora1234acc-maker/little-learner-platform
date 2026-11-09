@@ -1,0 +1,35 @@
+[
+  {
+    "id": "img1",
+    "name": "user.png",
+    "url": "/asset/images/user.png",
+    "type": "image/png",
+    "size": 48213,
+    "width": 1920,
+    "height": 973,
+    "alt": "Administrator profile preview",
+    "created_at": "2026-01-05T08:00:00Z"
+  },
+  {
+    "id": "img2",
+    "name": "user2.png",
+    "url": "/asset/images/user2.png",
+    "type": "image/png",
+    "size": 51120,
+    "width": 1920,
+    "height": 973,
+    "alt": "Teacher profile preview",
+    "created_at": "2026-01-12T08:00:00Z"
+  },
+  {
+    "id": "img3",
+    "name": "POS.png",
+    "url": "/asset/images/POS.png",
+    "type": "image/png",
+    "size": 148210,
+    "width": 1920,
+    "height": 973,
+    "alt": "Dashboard screenshot sample",
+    "created_at": "2026-02-01T08:00:00Z"
+  }
+]

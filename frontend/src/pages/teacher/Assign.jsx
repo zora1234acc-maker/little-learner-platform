@@ -1,136 +1,339 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, UserCheck } from "lucide-react";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { ArrowLeft, CheckCircle2, UserCheck } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
+import { Avatar } from "@/components/Avatar";
+import { api } from "@/api/client";
+import { useAuth } from "@/context/AuthContext";
+import { useSite } from "@/context/SiteContext";
 
 export function TeacherAssign() {
   const { t } = useTranslation();
+  const { lang } = useSite();
   const { courseId } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
+
   const [itemType, setItemType] = useState("lesson");
   const [itemId, setItemId] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [title, setTitle] = useState("");
   const [instructions, setInstructions] = useState("");
+  const [selected, setSelected] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [lessons, setLessons] = useState([]);
+  const [quizzes, setQuizzes] = useState([]);
+  const [courseName, setCourseName] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+  const [created, setCreated] = useState(null);
 
-  const allStudents = [
-    { id: "u3", full_name: "Sophal", avatar: "🐻" },
-    { id: "u4", full_name: "Sophea", avatar: "🐱" }
-  ];
+  useEffect(() => {
+    let live = true;
+    const load = async () => {
+      try {
+        const [classRes, lessonRes, quizRes, courseRes] = await Promise.all([
+          api.progress.class(user.id),
+          api.content.lessons.list({ publishedOnly: true }),
+          api.content.quizzes.list({ publishedOnly: true }),
+          api.content.courses.list(),
+        ]);
+        if (!live) return;
 
-  const items = {
-    lesson: [
-      { id: "l1", title: { en: "First Consonant: ក", km: "អក្សរដើម៖ ក" } },
-      { id: "l2", title: { en: "Counting 1 to 5", km: "គណនា 1 ដល់ 5" } },
-      { id: "l3", title: { en: "Parts of a Plant", km: "បច្ចុប្បន្នភាពរបស់ស្លឹង" } }
-    ],
-    quiz: [
-      { id: "q1", title: { en: "Khmer Alphabet Quiz", km: "ប្រអប់អក្សរខ្មែរ" } },
-      { id: "q2", title: { en: "Counting Quiz", km: "ប្រអប់គណនា" } }
-    ]
+        const courseLessons = courseId
+          ? lessonRes.data.filter((lesson) => lesson.course_id === courseId)
+          : lessonRes.data;
+        const lessonIds = new Set(courseLessons.map((lesson) => lesson.id));
+        const courseQuizzes = courseId
+          ? quizRes.data.filter((quiz) => lessonIds.has(quiz.lesson_id))
+          : quizRes.data;
+
+        setStudents(classRes.data);
+        setSelected(classRes.data.map((student) => student.id));
+        setLessons(courseLessons);
+        setQuizzes(courseQuizzes);
+        const course = courseRes.data.find((item) => item.id === courseId);
+        setCourseName(course ? course.title?.[lang] || course.title?.en : "");
+      } catch {
+        if (live) setError("Could not load the library. Please refresh.");
+      } finally {
+        if (live) setLoading(false);
+      }
+    };
+    load();
+    return () => {
+      live = false;
+    };
+  }, [user.id, courseId, lang]);
+
+  const text = (field) => (typeof field === "string" ? field : field?.[lang] || field?.en || "");
+  const options = itemType === "lesson" ? lessons : quizzes;
+
+  useEffect(() => {
+    if (options.length > 0) {
+      setItemId((current) => (options.some((item) => item.id === current) ? current : options[0].id));
+    } else {
+      setItemId("");
+    }
+  }, [itemType, lessons, quizzes]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const selectedItem = useMemo(
+    () => options.find((item) => item.id === itemId) || null,
+    [options, itemId]
+  );
+
+  // Suggest a title from the selected lesson/quiz.
+  useEffect(() => {
+    if (selectedItem && !title) setTitle(text(selectedItem.title));
+  }, [selectedItem]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const toggleStudent = (id) => {
+    setSelected((current) =>
+      current.includes(id) ? current.filter((item) => item !== id) : [...current, id]
+    );
   };
 
-  const lang = localStorage.getItem("lang") || "en";
-  const currentItems = items[itemType];
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate("/teacher/grading");
+  const submit = async (event) => {
+    event.preventDefault();
+    setError("");
+    if (!itemId) {
+      setError("Choose a lesson or quiz first.");
+      return;
+    }
+    if (selected.length === 0) {
+      setError("Select at least one student.");
+      return;
+    }
+    setSaving(true);
+    try {
+      const body = title || text(selectedItem?.title);
+      const res = await api.assignments.create({
+        item_type: itemType,
+        item_id: itemId,
+        assigned_by: user.id,
+        due_date: dueDate || null,
+        title: { en: body, km: body, ar: body },
+        instructions: {
+          en: instructions || "Complete this activity.",
+          km: instructions || "បញ្ចប់សកម្មភាពនេះ។",
+          ar: instructions || "أكمل هذا النشاط.",
+        },
+        student_ids: selected,
+      });
+      setCreated(res.data);
+    } catch {
+      setError("Could not create the assignment. Please try again.");
+    } finally {
+      setSaving(false);
+    }
   };
+
+  if (created) {
+    return (
+      <div className="mx-auto max-w-md space-y-6 py-16">
+        <div className="rounded-[var(--radius-xl)] border border-border bg-card p-8 text-center">
+          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-mint/20 text-[#1B7F66]">
+            <CheckCircle2 className="h-10 w-10" />
+          </div>
+          <h1 className="text-2xl font-black text-blueberry">{t("teacher.assign.assignment_created")}</h1>
+          <p className="mt-2 text-muted-foreground">
+            Sent to {created.targets.length} student{created.targets.length === 1 ? "" : "s"}.
+          </p>
+          <p className="mt-3 rounded-xl bg-muted/40 px-4 py-3 text-sm font-bold text-foreground">
+            {text(created.title)}
+          </p>
+
+          <div className="mt-6 flex flex-col gap-2">
+            <Link to="/teacher/class-progress" className="btn-primary min-h-[44px]">
+              View class progress
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                setCreated(null);
+                setTitle("");
+                setInstructions("");
+                setDueDate("");
+              }}
+              className="btn-secondary min-h-[44px]"
+            >
+              Create another
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
-      <nav className="flex items-center gap-2 mb-6">
-        <button onClick={() => navigate(-1)} className="flex items-center gap-1 p-2 rounded-lg border border-border hover:bg-accent">
-          <ArrowLeft className="w-4 h-4" /> {t("common.back")}
+    <div className="mx-auto max-w-3xl space-y-6">
+      <nav className="flex items-center gap-2">
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center gap-1 rounded-lg border border-border p-2 text-sm font-bold text-muted-foreground hover:bg-accent"
+        >
+          <ArrowLeft className="flip-rtl h-4 w-4" /> {t("common.back")}
         </button>
       </nav>
 
-      <div className="card">
-        <PageHeader eyebrow={t("nav.assign")} title="Create Assignment" />
+      <PageHeader
+        eyebrow={t("nav.assign")}
+        title="Create assignment"
+        description={
+          courseName
+            ? `Assign a lesson or quiz from "${courseName}" to your linked students.`
+            : "Pick a lesson or quiz and assign it to your linked students."
+        }
+      />
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="field-label">Item Type</label>
-            <div className="flex gap-2">
-              {["lesson", "quiz", "assignment"].map((type) => (
-                <button
-                  key={type}
-                  onClick={() => setItemType(type)}
-                  className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${itemType === type ? "bg-blueberry text-white border-blueberry" : "border border-border bg-background hover:bg-accent"} touch-target`}
-                >
-                  {type}
-                </button>
-              ))}
-            </div>
+      <form onSubmit={submit} className="card-md space-y-5">
+        {error ? (
+          <p className="rounded-xl border border-bubblegum/40 bg-bubblegum/10 px-4 py-3 text-sm text-bubblegum">
+            {error}
+          </p>
+        ) : null}
+
+        <div>
+          <label className="field-label">{t("teacher.assign.item_type")}</label>
+          <div className="flex gap-2">
+            {["lesson", "quiz"].map((type) => (
+              <button
+                key={type}
+                type="button"
+                onClick={() => {
+                  setItemType(type);
+                  setTitle("");
+                }}
+                className={`min-h-[44px] flex-1 rounded-xl border text-sm font-bold capitalize ${
+                  itemType === type
+                    ? "border-blueberry bg-blueberry text-white"
+                    : "border-border bg-background text-muted-foreground hover:bg-accent"
+                }`}
+              >
+                {type}
+              </button>
+            ))}
           </div>
+        </div>
 
-          <div>
-            <label className="field-label">Select Item</label>
-            <select
-              value={itemId}
-              onChange={(e) => setItemId(e.target.value)}
-              className="input-field"
+        <div>
+          <label className="field-label">{t("teacher.assign.select", { itemType })}</label>
+          <select
+            value={itemId}
+            onChange={(event) => {
+              setItemId(event.target.value);
+              const chosen = options.find((item) => item.id === event.target.value);
+              if (chosen) setTitle(text(chosen.title));
+            }}
+            className="input-field"
+            disabled={loading}
+          >
+            {options.map((item) => (
+              <option key={item.id} value={item.id}>
+                {text(item.title)}
+              </option>
+            ))}
+          </select>
+          {!loading && options.length === 0 ? (
+            <p className="mt-2 text-xs text-bubblegum">
+              No {itemType}s are available for this selection.
+            </p>
+          ) : null}
+        </div>
+
+        <div>
+          <label className="field-label">{t("teacher.assign.assignment_title")}</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+            className="input-field"
+            placeholder="Assignment title"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="field-label">{t("teacher.assign.instructions")}</label>
+          <textarea
+            value={instructions}
+            onChange={(event) => setInstructions(event.target.value)}
+            rows={3}
+            className="input-field"
+            placeholder="What should the student do?"
+          />
+        </div>
+
+        <div>
+          <label className="field-label">{t("teacher.assign.due_date")}</label>
+          <input
+            type="date"
+            value={dueDate}
+            onChange={(event) => setDueDate(event.target.value)}
+            className="input-field"
+          />
+        </div>
+
+        <div>
+          <div className="flex items-center justify-between">
+            <label className="field-label mb-0">{t("teacher.assign.assign_to_students")}</label>
+            <button
+              type="button"
+              onClick={() =>
+                setSelected(
+                  selected.length === students.length ? [] : students.map((student) => student.id)
+                )
+              }
+              className="text-xs font-bold text-blueberry hover:underline"
             >
-              {currentItems.map((item) => (
-                <option key={item.id} value={item.id}>{item.title[lang] || item.title.en}</option>
-              ))}
-            </select>
+              {selected.length === students.length ? t("teacher.assign.clear_all") : t("teacher.assign.select_all")}
+            </button>
           </div>
 
-          <div>
-            <label className="field-label">Title</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="input-field"
-              placeholder="Assignment title"
-            />
+          <div className="mt-2 space-y-2">
+            {students.map((student) => (
+              <label
+                key={student.id}
+                className="flex cursor-pointer items-center gap-3 rounded-xl border border-border bg-background px-3 py-2.5"
+              >
+                <input
+                  type="checkbox"
+                  checked={selected.includes(student.id)}
+                  onChange={() => toggleStudent(student.id)}
+                  className="h-4 w-4 rounded border-border text-blueberry"
+                />
+                <Avatar src={student.avatar_url} name={student.avatar} size="sm" />
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-sm font-bold text-foreground">
+                    {student.full_name}
+                  </span>
+                  <span className="block text-xs text-muted-foreground">
+                    {student.grade || "Grade 1"} · {student.class_name || "1A"}
+                  </span>
+                </span>
+              </label>
+            ))}
+            {!loading && students.length === 0 ? (
+              <p className="rounded-xl bg-muted/40 px-4 py-4 text-center text-sm text-muted-foreground">
+                {t("teacher.assign.no_students_linked")}
+              </p>
+            ) : null}
           </div>
+        </div>
 
-          <div>
-            <label className="field-label">Instructions</label>
-            <textarea
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-              rows={3}
-              className="input-field h-24"
-              placeholder="What should the student do?"
-            />
-          </div>
-
-          <div>
-            <label className="field-label">Due Date</label>
-            <input
-              type="date"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
-              className="input-field"
-            />
-          </div>
-
-          <div>
-            <label className="field-label">Assign to Students</label>
-            <div className="space-y-2">
-              {allStudents.map((s) => (
-                <label key={s.id} className="flex items-center gap-3 cursor-pointer">
-                  <input type="checkbox" className="w-4 h-4 rounded border-border text-blueberry focus:ring-blueberry" defaultChecked />
-                  <div className="flex items-center gap-2">
-                    <span className="w-8 h-8 rounded-lg bg-muted/40 flex items-center justify-center text-xs">{s.avatar}</span>
-                    <span className="text-foreground">{s.full_name}</span>
-                  </div>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <button type="submit" className="w-full btn-primary touch-target">
-            <UserCheck className="w-4 h-4 mr-2" /> Assign to Selected Students
-          </button>
-        </form>
-      </div>
+        <button
+          type="submit"
+          disabled={saving || !itemId || selected.length === 0}
+          className={`btn-primary w-full min-h-[48px] ${
+            saving || !itemId || selected.length === 0 ? "cursor-not-allowed opacity-50" : ""
+          }`}
+        >
+          <UserCheck className="h-4 w-4" />
+          {saving ? "Creating..." : `Assign to ${selected.length} student${selected.length === 1 ? "" : "s"}`}
+        </button>
+      </form>
     </div>
   );
 }
