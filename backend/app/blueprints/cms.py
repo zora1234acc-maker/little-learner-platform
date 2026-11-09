@@ -29,7 +29,16 @@ def public_menus():
     if location:
         query = query.filter_by(location=location)
     items = query.order_by(MenuItem.position).all()
-    return jsonify([{"id": i.id, "label": t(i.label, lang), "url": i.url, "position": i.position} for i in items])
+    return jsonify([
+        {
+            "id": i.id,
+            "label": t(i.label, lang),
+            "url": i.url,
+            "position": i.position,
+            "parent_id": i.parent_id,
+        }
+        for i in items
+    ])
 
 
 @cms_bp.get("/public/pages/<slug>")

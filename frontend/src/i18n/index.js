@@ -9,7 +9,10 @@ import ar from "./ar.json";
 const resources = {
   en: { translation: en },
   km: { translation: km },
+  ar: { translation: ar },
 };
+
+const rtlLangs = ["ar"];
 
 i18n
   .use(LanguageDetector)
@@ -17,7 +20,7 @@ i18n
   .init({
     resources,
     fallbackLng: "en",
-    supportedLngs: ["en", "km"],
+    supportedLngs: ["en", "km", "ar"],
     detection: {
       order: ["localStorage", "navigator", "htmlTag"],
       caches: ["localStorage"],
@@ -26,5 +29,17 @@ i18n
       escapeValue: false,
     },
   });
+
+// Apply RTL direction for Arabic
+if (rtlLangs.includes(i18n.language)) {
+  document.documentElement.dir = "rtl";
+  document.documentElement.lang = i18n.language;
+}
+
+i18n.on("languageChanged", (lng) => {
+  const isRtl = rtlLangs.includes(lng);
+  document.documentElement.dir = isRtl ? "rtl" : "ltr";
+  document.documentElement.lang = lng;
+});
 
 export default i18n;

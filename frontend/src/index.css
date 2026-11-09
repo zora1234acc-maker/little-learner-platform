@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== Local font fallback — Khmer OS Siemreap (works without Google Fonts) ===== */
+@font-face {
+  font-family: "Khmer OS Siemreap";
+  src: url("/fonts/khmer-os-siemreap.woff2") format("woff2"),
+       url("/fonts/khmer-os-siemreap.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("/fonts/nunito.woff2") format("woff2"),
+       url("/fonts/nunito.woff") format("woff");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ===== Design tokens (docs/06 design system) ===== */
 @layer base {
   :root {
@@ -62,43 +81,114 @@
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgb(var(--primary) / 0.18);
+    color: rgb(var(--foreground));
   }
 }
 
-/* ===== Typography scale — Baloo 2 for display, Nunito for body ===== */
+/* ===== Base typography — English default, Khmer when lang="km" ===== */
 @layer base {
   html {
     font-size: 17px;
+    font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "Baloo 2", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  body {
+    font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+  }
+
+  /* English — Nunito for every element */
+  [lang="en"],
+  [lang="en"] * {
+    font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  }
+
+  [lang="en"] h1,
+  [lang="en"] h2,
+  [lang="en"] h3,
+  [lang="en"] h4,
+  [lang="en"] h5,
+  [lang="en"] h6 {
+    font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: -0.02em;
   }
 
-  h1 { font-size: 2.75rem; }
-  h2 { font-size: 2rem; }
-  h3 { font-size: 1.5rem; }
-  h4 { font-size: 1.25rem; }
-
-  p, li, span, div, button, input, select, textarea, label {
-    font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  [lang="en"] p,
+  [lang="en"] li,
+  [lang="en"] span,
+  [lang="en"] div,
+  [lang="en"] button,
+  [lang="en"] input,
+  [lang="en"] select,
+  [lang="en"] textarea,
+  [lang="en"] label,
+  [lang="en"] a {
+    font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
     font-weight: 400;
     line-height: 1.7;
   }
 
+  /* Heading sizes (apply to both languages) */
+  h1 {
+    font-size: 2.75rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+  }
+
+  /* Khmer — Khmer OS Siemreap for EVERY element when Khmer is active */
   [lang="km"] {
-    font-family: "Noto Sans Khmer", "Noto Sans", sans-serif;
+    font-family: "Khmer OS Siemreap", "Noto Sans Khmer", "Noto Sans", sans-serif !important;
     line-height: 1.9;
   }
 
-  [lang="ar"] {
-    font-family: "Noto Sans Arabic", "Noto Sans", sans-serif;
-    line-height: 1.8;
+  [lang="km"] * {
+    font-family: "Khmer OS Siemreap", "Noto Sans Khmer", "Noto Sans", sans-serif !important;
+  }
+
+  [lang="km"] h1,
+  [lang="km"] h2,
+  [lang="km"] h3,
+  [lang="km"] h4,
+  [lang="km"] h5,
+  [lang="km"] h6 {
+    font-family: "Khmer OS Siemreap", "Noto Sans Khmer", "Noto Sans", sans-serif !important;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  [lang="km"] p,
+  [lang="km"] li,
+  [lang="km"] span,
+  [lang="km"] div,
+  [lang="km"] button,
+  [lang="km"] input,
+  [lang="km"] select,
+  [lang="km"] textarea,
+  [lang="km"] label,
+  [lang="km"] a {
+    font-family: "Khmer OS Siemreap", "Noto Sans Khmer", "Noto Sans", sans-serif !important;
+    font-weight: 400;
+    line-height: 1.9;
   }
 }
 
@@ -108,6 +198,44 @@
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-[var(--radius-xl)] bg-sunshine text-blueberry font-bold text-base hover:bg-yellow-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blueberry focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
     min-height: 52px;
+  }
+
+  /* Landing page surfaces use softer corners than compact utility controls. */
+  .home-page {
+    position: relative;
+  }
+
+  .home-page::before,
+  .home-page::after {
+    position: absolute;
+    z-index: -1;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 9999px;
+    content: "";
+    pointer-events: none;
+    filter: blur(1px);
+  }
+
+  .home-page::before {
+    top: 4rem;
+    left: -12rem;
+    background: rgb(220 215 255 / 0.45);
+  }
+
+  .home-page::after {
+    top: 42rem;
+    right: -12rem;
+    background: rgb(255 232 239 / 0.45);
+  }
+
+  .home-page [class~="rounded-[4px]"] {
+    border-radius: 1rem;
+  }
+
+  .home-page .btn-primary,
+  .home-page .btn-secondary {
+    border-radius: 1rem;
   }
 
   /* Secondary button — outline, medium radius */
@@ -124,17 +252,17 @@
 
   /* Card — large radius for primary content cards */
   .card {
-    @apply rounded-[var(--radius-xl)] border border-border bg-card p-8 transition-shadow hover:shadow-md;
+    @apply rounded-2xl border border-[#E7E8F0] bg-white p-6 transition-shadow hover:shadow-[0_14px_32px_-26px_rgba(48,50,95,0.5)];
   }
 
   /* Card — medium radius for secondary cards */
   .card-md {
-    @apply rounded-[var(--radius-lg)] border border-border bg-card p-6 transition-shadow hover:shadow-sm;
+    @apply rounded-2xl border border-[#E7E8F0] bg-white p-6 transition-shadow hover:shadow-[0_14px_32px_-26px_rgba(48,50,95,0.5)];
   }
 
   /* Card — small radius for list items */
   .card-sm {
-    @apply rounded-[var(--radius-md)] border border-border bg-card p-4 transition-shadow hover:bg-accent/40;
+    @apply rounded-xl border border-[#E7E8F0] bg-white p-4 transition-shadow hover:border-[#C8C5F2] hover:bg-[#FAFAFF];
   }
 
   /* Icon circle — varied sizes */
@@ -157,7 +285,7 @@
 
   /* Input — large touch target, medium radius */
   .input-field {
-    @apply w-full px-5 py-3.5 rounded-[var(--radius-lg)] border border-border bg-background text-foreground focus:ring-2 focus:ring-blueberry focus:border-transparent outline-none text-base;
+    @apply w-full rounded-xl border border-[#DCDDE8] bg-white px-4 py-3.5 text-base text-foreground outline-none transition focus:border-[#8D89DF] focus:ring-2 focus:ring-[#DCD9FF];
     min-height: 52px;
   }
 
@@ -177,10 +305,114 @@
   }
 }
 
-/* ===== RTL adjustments (logical properties) ===== */
-[dir="rtl"] {
-  .text-right { text-align: left !important; }
-  .text-left { text-align: right !important; }
+/* ===== Motion helpers ===== */
+.origin-inline-start {
+  transform-origin: left;
+}
+[dir="rtl"] .origin-inline-start {
+  transform-origin: right;
+}
+
+.animated-blob {
+  animation: background-drift 16s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animated-gradient {
+  background: linear-gradient(
+    120deg,
+    rgba(81, 75, 255, 0.06),
+    rgba(255, 215, 94, 0.09),
+    rgba(255, 145, 177, 0.06),
+    rgba(81, 75, 255, 0.06)
+  );
+  background-size: 300% 300%;
+  animation: background-gradient-shift 22s ease infinite;
+}
+
+.animated-blob-two {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+
+.animated-blob-three {
+  animation-delay: -9s;
+  animation-duration: 18s;
+}
+
+.animated-box {
+  animation: box-float 12s ease-in-out infinite;
+  box-shadow: 0 12px 30px rgba(48, 50, 95, 0.06);
+  will-change: transform;
+}
+
+.animated-box-two {
+  animation-delay: -3s;
+  animation-duration: 15s;
+}
+
+.animated-box-three {
+  animation-delay: -6s;
+  animation-duration: 10s;
+}
+
+.animated-box-four {
+  animation-delay: -9s;
+  animation-duration: 14s;
+}
+
+@keyframes background-drift {
+  from {
+    transform: translate3d(-18px, -10px, 0) scale(1);
+  }
+  to {
+    transform: translate3d(24px, 18px, 0) scale(1.12);
+  }
+}
+
+@keyframes background-gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes box-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-5deg);
+  }
+  50% {
+    transform: translate3d(12px, -18px, 0) rotate(7deg);
+  }
+}
+
+/* Hero card: light 3D tilt driven by --rx/--ry set in Home.jsx. */
+.tilt-card {
+  transform: perspective(1100px) rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg));
+  transition: transform 0.25s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
+  .animated-blob {
+    animation: none !important;
+  }
+  .animated-gradient {
+    animation: none !important;
+  }
+  .animated-box {
+    animation: none !important;
+  }
+  .tilt-card {
+    transform: none !important;
+  }
 }
 
 /* ===== Utilities ===== */
@@ -195,7 +427,9 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;

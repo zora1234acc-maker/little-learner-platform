@@ -75,3 +75,13 @@ export const useAuth = () => {
   if (!context) throw new Error("useAuth must be used within AuthProvider");
   return context;
 };
+
+// Renders children only when the signed-in user can access the given student.
+// Admin reaches any student; parent/teacher only linked students; student only
+// their own id. Returns null (blocked) while loading or when access is denied.
+export const StudentAccessGuard = ({ studentId, children }) => {
+  const { user, loading, canAccessStudent } = useAuth();
+  if (loading || !user) return null;
+  if (!canAccessStudent(studentId)) return null;
+  return children;
+};

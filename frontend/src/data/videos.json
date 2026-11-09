@@ -1,0 +1,41 @@
+[
+  {
+    "id": "video1",
+    "title": { "en": "Learn with a story", "km": "រៀនជាមួយរឿង", "ar": "تعلم من خلال قصة" },
+    "description": {
+      "en": "A short, friendly video to make learning feel fun.",
+      "km": "វីដេអូខ្លី និងរួសរាយ ដើម្បីធ្វើឱ្យការរៀនមានភាពសប្បាយ។",
+      "ar": "فيديو قصير وودود يجعل التعلم ممتعًا."
+    },
+    "category": "Activities",
+    "embedUrl": "https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ",
+    "duration": "10 min",
+    "is_published": true
+  },
+  {
+    "id": "video2",
+    "title": { "en": "Explore and discover", "km": "ស្វែងយល់ និងរកឃើញ", "ar": "استكشف واكتشف" },
+    "description": {
+      "en": "Watch, pause, and talk about what you notice.",
+      "km": "មើល ផ្អាក ហើយពិភាក្សាអំពីអ្វីដែលអ្នកបានសង្កេត។",
+      "ar": "شاهد وأوقف الفيديو وتحدث عما تلاحظه."
+    },
+    "category": "Videos",
+    "embedUrl": "https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ",
+    "duration": "8 min",
+    "is_published": true
+  },
+  {
+    "id": "video3",
+    "title": { "en": "A quiet learning break", "km": "ពេលសម្រាករៀន", "ar": "استراحة تعلم هادئة" },
+    "description": {
+      "en": "A gentle activity for curious minds.",
+      "km": "សកម្មភាពទន់ភ្លន់សម្រាប់ចិត្តដែលចង់ដឹងចង់ឃើញ។",
+      "ar": "نشاط لطيف للعقول الفضولية."
+    },
+    "category": "Activities",
+    "embedUrl": "https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ",
+    "duration": "6 min",
+    "is_published": true
+  }
+]

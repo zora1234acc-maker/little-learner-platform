@@ -1,12 +1,22 @@
+import { Fragment } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 const routeLabels = {
-  "/admin/dashboard": "Dashboard",
+  "/admin": "Dashboard",
   "/admin/users": "Users",
   "/admin/content": "Content",
-  "/admin/cms": "CMS",
+  "/admin/content/subjects": "Subjects",
+  "/admin/content/courses": "Courses",
+  "/admin/content/lessons": "Lessons",
+  "/admin/content/quizzes": "Quizzes",
+  "/admin/cms": "Website CMS",
+  "/admin/cms/settings": "Site settings",
+  "/admin/cms/menus": "Menus",
+  "/admin/cms/footer": "Footer blocks",
+  "/admin/cms/pages": "Pages",
+  "/admin/cms/media": "Media",
+  "/videos": "Videos",
   "/admin/grading": "Grading",
   "/teacher/library": "Library",
   "/teacher/assign": "Assignments",
@@ -18,15 +28,13 @@ const routeLabels = {
 };
 
 export function Breadcrumb() {
-  const { t } = useTranslation();
   const location = useLocation();
   const path = location.pathname;
 
-  // Build breadcrumb from path segments
   const segments = path.split("/").filter(Boolean);
-  const items = segments.map((_, i) => {
+  const items = segments.map((segment, i) => {
     const route = "/" + segments.slice(0, i + 1).join("/");
-    const label = routeLabels[route] || segments[i];
+    const label = routeLabels[route] || decodeURIComponent(segment).replace(/-/g, " ");
     const isLast = i === segments.length - 1;
     return { route, label, isLast };
   });
@@ -34,21 +42,21 @@ export function Breadcrumb() {
   if (items.length <= 1) return null;
 
   return (
-    <nav className="flex flex-wrap items-center gap-1 text-xs text-muted-foreground mb-6" aria-label="Breadcrumb">
-      <Link to="/" className="hover:text-foreground transition-colors">
+    <nav className="flex flex-wrap items-center gap-1 text-xs text-[#8D90A4]" aria-label="Breadcrumb">
+      <Link to="/" className="transition-colors hover:text-[#514BFF]">
         Home
       </Link>
-      {items.map((item, i) => (
-        <React.Fragment key={item.route}>
-          <ChevronRight className="w-3 h-3 mx-1" />
+      {items.map((item) => (
+        <Fragment key={item.route}>
+          <ChevronRight className="mx-1 h-3 w-3 text-[#C2C3D0]" />
           {item.isLast ? (
-            <span className="text-foreground font-medium">{item.label}</span>
+            <span className="font-semibold capitalize text-[#30325F]">{item.label}</span>
           ) : (
-            <Link to={item.route} className="hover:text-foreground transition-colors">
+            <Link to={item.route} className="capitalize transition-colors hover:text-[#514BFF]">
               {item.label}
             </Link>
           )}
-        </React.Fragment>
+        </Fragment>
       ))}
     </nav>
   );

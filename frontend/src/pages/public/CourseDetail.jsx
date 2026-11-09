@@ -1,69 +1,98 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { BookOpen } from "lucide-react";
-import { SectionDivider } from "@/components/SectionDivider";
+import { ArrowLeft, BookOpen, ArrowRight } from "lucide-react";
+import { api } from "@/api/client";
+import { useSite } from "@/context/SiteContext";
 
 export function CourseDetail() {
   const { t } = useTranslation();
+  const { lang } = useSite();
   const { subjectId } = useParams();
+  const [subject, setSubject] = useState(null);
   const [courses, setCourses] = useState([]);
+  const [lessons, setLessons] = useState([]);
   const [loading, setLoading] = useState(true);
-  const lang = localStorage.getItem("lang") || "en";
 
   useEffect(() => {
-    const allCourses = [
-      { id: "c1", subject_id: "sub1", title: { en: "Khmer Alphabet", km: "អក្សរខ្មែរ", ar: "حروف اللغة الخميرية" }, position: 1 },
-      { id: "c2", subject_id: "sub2", title: { en: "Counting 1-10", km: "គណនា 1-10", ar: "العد من 1 إلى 10" }, position: 1 },
-      { id: "c3", subject_id: "sub3", title: { en: "Plants and Animals", km: "ប្រភេទស្លឹងនិងសត្វ", ar: "النباتات والحيوانات" }, position: 1 }
-    ];
-    setCourses(allCourses.filter((c) => c.subject_id === subjectId));
-    setLoading(false);
+    let live = true;
+    Promise.all([
+      api.content.subjects.list(),
+      api.content.courses.list({ subject_id: subjectId, publishedOnly: true }),
+      api.content.lessons.list({ publishedOnly: true }),
+    ]).then(([subjectRes, courseRes, lessonRes]) => {
+      if (!live) return;
+      setSubject(subjectRes.data.find((item) => item.id === subjectId) || null);
+      setCourses(courseRes.data);
+      setLessons(lessonRes.data);
+      setLoading(false);
+    });
+    return () => {
+      live = false;
+    };
   }, [subjectId]);
 
-  const subjectNames = {
-    sub1: { en: "Khmer Language", km: "ភាសាខ្មែរ", ar: "اللغة الخميرية" },
-    sub2: { en: "Mathematics", km: "គណិតវិជ្ជា", ar: "الرياضيات" },
-    sub3: { en: "Science", km: "វិទ្យាសាស្ត្រ", ar: "العلوم" }
-  };
-
-  const subject = subjectNames[subjectId] || subjectNames.sub1;
-
   if (loading) {
-    return <div className="text-center py-24 text-muted-foreground animate-pulse">{t("common.loading")}</div>;
+    return <div className="animate-pulse py-24 text-center text-muted-foreground">{t("common.loading")}</div>;
+  }
+
+  if (!subject) {
+    return (
+      <div className="py-24 text-center">
+        <p className="text-muted-foreground">Subject not found.</p>
+        <Link to="/subjects" className="btn-secondary mt-4">
+          {t("nav.subjects")}
+        </Link>
+      </div>
+    );
   }
 
   return (
     <div className="space-y-10">
-      <nav className="flex items-center gap-2">
-        <Link to="/subjects" className="link-primary">{t("nav.subjects")}</Link>
+      <nav className="flex items-center gap-2 text-sm">
+        <Link to="/subjects" className="link-primary">
+          {t("nav.subjects")}
+        </Link>
         <span className="text-muted-foreground">/</span>
-        <span className="text-foreground font-medium">{subject[lang] || subject.en}</span>
+        <span className="font-medium text-foreground">{subject.title?.[lang] || subject.title?.en}</span>
       </nav>
 
-      <h1 className="text-3xl font-black text-blueberry">{subject[lang] || subject.en}</h1>
+      <header>
+        <span className="eyebrow">{t("home.featured")}</span>
+        <h1 className="text-3xl font-black text-blueberry sm:text-4xl">{subject.title?.[lang] || subject.title?.en}</h1>
+        <p className="mt-3 max-w-2xl text-muted-foreground">{subject.description?.[lang] || subject.description?.en}</p>
+      </header>
 
-      <SectionDivider />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {courses.map((course) => (
-          <div key={course.id} className="card-md border-l-4 border-mint group">
-            <div className="flex items-center gap-4 mb-5">
-              <div className="icon-md bg-mint/10 text-mint-600 group-hover:bg-mint transition-colors">
-                <BookOpen className="w-5 h-5" />
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {courses.map((course, index) => {
+          const courseLessons = lessons.filter((lesson) => lesson.course_id === course.id);
+          const colors = ["border-blueberry", "border-sunshine", "border-mint"];
+          return (
+            <article key={course.id} className={`card-md border-s-4 ${colors[index % colors.length]}`}>
+              <div className="mb-5 flex items-center justify-between">
+                <span className="icon-md bg-mint/10 text-[#16735D]">
+                  <BookOpen className="h-5 w-5" />
+                </span>
+                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Course</span>
               </div>
-              <span className="text-xs font-semibold tracking-normal text-muted-foreground uppercase">Course</span>
-            </div>
-            <h3 className="font-semibold text-lg text-foreground mb-2">{course.title[lang] || course.title.en}</h3>
-            <p className="text-sm text-muted-foreground mb-5">
-              Learn the basics of {subject[lang] || subject.en} with interactive lessons and quizzes.
-            </p>
-            <Link to={`/lessons/${course.id}`} className="btn-secondary w-full">
-              Start Course <span className="text-xs">→</span>
-            </Link>
-          </div>
-        ))}
+              <h3 className="text-lg font-bold text-foreground">{course.title?.[lang] || course.title?.en}</h3>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">{course.description?.[lang] || course.description?.en}</p>
+              <p className="mt-3 text-xs font-bold text-muted-foreground">{courseLessons.length} lesson{courseLessons.length === 1 ? "" : "s"}</p>
+              <Link to={`/courses/${course.id}/lessons`} className="btn-secondary mt-5 w-full">
+                {t("home.start")} <ArrowRight className="flip-rtl h-4 w-4" />
+              </Link>
+            </article>
+          );
+        })}
       </div>
+
+      {courses.length === 0 ? (
+        <div className="card text-center text-muted-foreground">Courses for this subject are being prepared.</div>
+      ) : null}
+
+      <Link to="/subjects" className="inline-flex items-center gap-2 text-sm font-bold text-blueberry hover:underline">
+        <ArrowLeft className="flip-rtl h-4 w-4" /> {t("nav.subjects")}
+      </Link>
     </div>
   );
 }

@@ -17,10 +17,138 @@
       "is_visible": true
     },
     {
+      "id": "m2a",
+      "label": { "en": "All Subjects", "km": "មុខវិជ្ជាទាំងអស់", "ar": "جميع المواد" },
+      "url": "/subjects",
+      "position": 1,
+      "parent_id": "m2",
+      "is_visible": true
+    },
+    {
+      "id": "m2b",
+      "label": { "en": "Khmer Language", "km": "ភាសាខ្មែរ", "ar": "اللغة الخميرية" },
+      "url": "/courses/sub1",
+      "position": 2,
+      "parent_id": "m2",
+      "is_visible": true
+    },
+    {
+      "id": "m2c",
+      "label": { "en": "Mathematics", "km": "គណិតវិជ្ជា", "ar": "الرياضيات" },
+      "url": "/courses/sub2",
+      "position": 3,
+      "parent_id": "m2",
+      "is_visible": true
+    },
+    {
+      "id": "m2d",
+      "label": { "en": "Science", "km": "វិទ្យាសាស្ត្រ", "ar": "العلوم" },
+      "url": "/courses/sub3",
+      "position": 4,
+      "parent_id": "m2",
+      "is_visible": true
+    },
+    {
+      "id": "m6",
+      "label": { "en": "Learning Paths", "km": "ផ្លូវសិក្សា", "ar": "مسارات التعلم" },
+      "url": "/subjects",
+      "position": 3,
+      "parent_id": null,
+      "is_visible": true
+    },
+    {
+      "id": "m6a",
+      "label": { "en": "Beginner", "km": "កម្រិតដំបូង", "ar": "مبتدئ" },
+      "url": "/subjects",
+      "position": 1,
+      "parent_id": "m6",
+      "is_visible": true
+    },
+    {
+      "id": "m6b",
+      "label": { "en": "Intermediate", "km": "កម្រិតមធ្យម", "ar": "متوسط" },
+      "url": "/subjects",
+      "position": 2,
+      "parent_id": "m6",
+      "is_visible": true
+    },
+    {
+      "id": "m6c",
+      "label": { "en": "Advanced", "km": "កម្រិតខ្ពស់", "ar": "متقدم" },
+      "url": "/subjects",
+      "position": 3,
+      "parent_id": "m6",
+      "is_visible": true
+    },
+    {
+      "id": "m7",
+      "label": { "en": "Resources", "km": "ធនធាន", "ar": "المصادر" },
+      "url": "/videos",
+      "position": 4,
+      "parent_id": null,
+      "is_visible": true
+    },
+    {
+      "id": "m7a",
+      "label": { "en": "Worksheets", "km": "សន្លឹកកិច្ចការ", "ar": "أوراق العمل" },
+      "url": "/videos",
+      "position": 1,
+      "parent_id": "m7",
+      "is_visible": true
+    },
+    {
+      "id": "m7b",
+      "label": { "en": "Activities", "km": "សកម្មភាព", "ar": "الأنشطة" },
+      "url": "/videos",
+      "position": 2,
+      "parent_id": "m7",
+      "is_visible": true
+    },
+    {
+      "id": "m7c",
+      "label": { "en": "Videos", "km": "វីដេអូ", "ar": "الفيديوهات" },
+      "url": "/videos",
+      "position": 3,
+      "parent_id": "m7",
+      "is_visible": true
+    },
+    {
+      "id": "m8",
+      "label": { "en": "For Parents", "km": "សម្រាប់មាតាបិតា", "ar": "للآباء" },
+      "url": "/about",
+      "position": 5,
+      "parent_id": null,
+      "is_visible": true
+    },
+    {
+      "id": "m8a",
+      "label": { "en": "Child Progress", "km": "វឌ្ឍនភាពកុមារ", "ar": "تقدم الطفل" },
+      "url": "/parent",
+      "position": 1,
+      "parent_id": "m8",
+      "is_visible": true
+    },
+    {
+      "id": "m8b",
+      "label": { "en": "Safety & Privacy", "km": "សុវត្ថិភាព និងឯកជនភាព", "ar": "الأمان والخصوصية" },
+      "url": "/privacy-for-children",
+      "position": 2,
+      "parent_id": "m8",
+      "is_visible": true
+    },
+    {
+      "id": "m8c",
+      "label": { "en": "Parent Guide", "km": "មគ្គុទ្ទេសក៍មាតាបិតា", "ar": "دليل الوالدين" },
+      "url": "/about",
+      "position": 3,
+      "parent_id": "m8",
+      "is_visible": true
+    },
+    {
       "id": "m3",
       "label": { "en": "About", "km": "អំពីយើង", "ar": "من نحن" },
       "url": "/about",
-      "position": 3,
+      "position": 6,
       "parent_id": null,
       "is_visible": true
     },
@@ -28,7 +156,7 @@
       "id": "m4",
       "label": { "en": "Contact", "km": "ទំនាក់ទំនង", "ar": "اتصل بنا" },
       "url": "/contact",
-      "position": 4,
+      "position": 7,
       "parent_id": null,
       "is_visible": true
     },
@@ -36,7 +164,7 @@
       "id": "m5",
       "label": { "en": "Login", "km": "បញ្ជូល", "ar": "تسجيل الدخول" },
       "url": "/login",
-      "position": 5,
+      "position": 8,
       "parent_id": null,
       "is_visible": true
     }
