@@ -17,7 +17,7 @@ npx vitest run
 
 **Expected**: all suites pass, including the new `src/api/students.test.js`. Baseline before this feature was **43 tests / 6 files passing**; the module adds its own suite on top and must not break `auth.test.js`, `links.test.js`, `mock.test.js`, `grading.test.js`, `authAccess.test.jsx`, `studentAccessGuard.test.jsx`.
 
-**Observed on 2026-11-09**: **7 files / 99 tests passed** (`students.test.js` contributes 56).
+**Observed on 2026-11-09**: **8 files / 105 tests passed** (`students.test.js` contributes 56; `Users.test.jsx` adds a 6-test UI walkthrough).
 
 The new suite covers, at minimum:
 

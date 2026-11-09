@@ -442,7 +442,8 @@
         "email_required": "Please enter a sign-in identity.",
         "email_invalid": "Please enter a valid email address.",
         "year_level": "Please enter a year level.",
-        "class_name": "Please enter a class."
+        "class_name": "Please enter a class.",
+        "exists": "That sign-in identity is already registered."
       }
     },
     "links": {

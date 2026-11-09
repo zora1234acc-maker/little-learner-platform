@@ -132,11 +132,13 @@ export function AdminUsers() {
     } catch (err) {
       // Per-field messages are rendered against their own input; everything
       // else falls back to a single banner. The form values are left alone.
-      const fields = err?.response?.data?.error?.fields;
-      if (fields) {
-        setErrors(fields);
+      const apiError = err?.response?.data?.error;
+      if (apiError?.fields) {
+        setErrors(apiError.fields);
+      } else if (apiError?.code === "exists") {
+        setError(t("admin.users.errors.exists"));
       } else {
-        setError(err?.response?.data?.error?.message || t("common.error"));
+        setError(apiError?.message || t("common.error"));
       }
     } finally {
       setSaving(false);

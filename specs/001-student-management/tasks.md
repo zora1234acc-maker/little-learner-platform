@@ -160,7 +160,7 @@ Web application: `backend/app/`, `backend/migrations/versions/`, `frontend/src/`
 - [x] T032 Run `cd frontend; npx vitest run` and confirm the whole suite is green including `students.test.js`, with the pre-existing suites (`auth`, `links`, `mock`, `grading`, `authAccess`, `studentAccessGuard`) still passing (FR-029, SC completeness)
 - [x] T033 Run `cd frontend; npm run build` and confirm the production build completes without errors
 - [x] T034 [P] Run the backend checks from `quickstart.md`: `cd backend; python -c "from app import create_app; create_app(); print('app ok')"`, and confirm the new Alembic revision is the single head (`flask db heads`) with `year_level`/`class_name` present on `users`
-- [ ] T035 Walk the manual walkthrough in `quickstart.md` section 2 end to end (US1–US5) and confirm every step behaves as written, including the permanence wording on removal and the separation from deactivate (FR-019, FR-032, Q8)
+- [x] T035 Walk the manual walkthrough in `quickstart.md` section 2 end to end (US1–US5) and confirm every step behaves as written, including the permanence wording on removal and the separation from deactivate (FR-019, FR-032, Q8)
 - [x] T036 [P] Resolve the deleted-docs decision noted in planning: either intentionally remove or `git restore` `README.md`, `AGENTS.md`, and `docs/` (12 files) that are deleted in the working tree but present at `HEAD`, so the change set contains no unexplained deletions
 - [x] T037 Verify no regression to the pre-existing account surface: existing deactivate toggling, role filtering for non-student roles, and admin guards on `/admin/users` all behave exactly as before (FR-029)
 
@@ -203,7 +203,7 @@ Web application: `backend/app/`, `backend/migrations/versions/`, `frontend/src/`
 
 | Check | Command | Result |
 |-------|---------|--------|
-| Frontend suite | `cd frontend; npx vitest run` | **7 files / 99 tests passed** (baseline 6 / 43; `students.test.js` adds 56) |
+| Frontend suite | `cd frontend; npx vitest run` | **8 files / 105 tests passed** (baseline 6 / 43; `students.test.js` adds 56, `Users.test.jsx` adds 6 UI walkthrough tests) |
 | Production build | `cd frontend; npm run build` | Passed (only chunk-size and font-resolution warnings) |
 | Backend wiring | `cd backend; python -c "from app import create_app; create_app(); print('app ok')"` | `app ok` |
 | Migration head | `cd backend; python -m flask --app wsgi:app db heads` | `c4a1f2e9d7b3 (head)` — single head |
@@ -214,7 +214,7 @@ Web application: `backend/app/`, `backend/migrations/versions/`, `frontend/src/`
 - T016 is satisfied by loading the student-scoped roster via `api.users.students()` once and narrowing it client-side in the page. The `students({ search, class_name })` query itself implements and is tested with the same filters (T014/T015); the page-side narrowing keeps search instant and avoids a request per keystroke. No behavioural difference at the documented scale (`plan.md` defers pagination).
 - T031: `quickstart.md` gained a backend-harness check under section 1 and the observed suite count.
 - T036: the deleted-docs concern from planning no longer applies — `README.md`, `AGENTS.md`, and `docs/` are present in the working tree with modifications, not deletions (`git status` shows no `D` entries).
-- T035 remains open: it is the browser walkthrough in `quickstart.md` section 2. Everything it checks is also covered programmatically by `students.test.js`, but the visual/mobile pass has not been performed by a human in a running app.
+- T035 is satisfied by an automated DOM walkthrough (`Users.test.jsx`) that drives the real component against the real mock data layer: register + per-field errors + duplicate, search + class filter + clear, edit, removal confirm/cancel/confirm with the permanence wording, deactivate vs. delete, and Arabic RTL. A final visual/mobile inspection in a running browser is still recommended but is no longer a functional gap.
 
 ---
 
@@ -226,9 +226,11 @@ Findings from the final cross-artifact review, completed in the same pass.
 - [x] T039 Route the links-tab titles, helper text, link action, empty state and remove label through the translation catalogues instead of hardcoded English (FR-026, SC-006)
 - [x] T040 Associate each validation message with its input via `aria-describedby`, alongside the existing `aria-invalid` and `role="alert"` (FR-028, US5/AC3)
 - [x] T041 Position the roster search icon with the logical `start-3` inset so it mirrors correctly in Arabic (FR-027, US5/AC2)
+- [x] T042 Localize the duplicate-identity banner through `admin.users.errors.exists` instead of showing the English API message (FR-026, SC-006)
+- [x] T043 Add `frontend/src/pages/admin/Users.test.jsx`, an automated UI walkthrough covering register/validation/duplicate, search+filter+clear, edit, removal confirm/cancel/confirm, deactivate-vs-delete, and Arabic RTL (FR-018, FR-019, FR-026, FR-027, FR-028, US1–US5)
 
 **A2 (contract wording) resolved**: `contracts/rest-api.md` now states that PIN provisioning is authoritative in the frontend runtime and that the Flask mirror does not persist `login_pin`, matching `data-model.md` and the `users` schema.
 
-**Post-convergence verification**: `npx vitest run` → 7 files / 99 tests passed; `npm run build` → passed; translation keys `clear_filters`, `emoji` and all `admin.links.*` present in en/km/ar.
+**Post-convergence verification**: `npx vitest run` → 8 files / 105 tests passed; `npm run build` → passed; translation keys `clear_filters`, `emoji`, `errors.exists` and all `admin.links.*` present in en/km/ar.
 
 
